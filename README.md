@@ -124,6 +124,24 @@ Then open <http://localhost:8080>. Use a server rather than opening the file dir
 
 ---
 
+## Updating images
+
+Hostinger's CDN caches images for 7 days and ignores `?v=` query strings, so a
+changed image will not reach visitors on its own. Asset filenames therefore
+carry a version suffix:
+
+```
+assets/img/logo-horizontal.v2.png
+assets/img/favicon-32.v2.png
+```
+
+**To replace any image:** save it with the next suffix (`.v3.png`), update the
+references (they live in `assets/js/layout.js` and the `<head>` of each page),
+and deploy. The new filename is a new cache key, so it appears immediately.
+
+`favicon.ico` is the one exception — browsers request it at a fixed path, so it
+cannot be versioned. It is capped at a 1-day cache in `.htaccess` instead.
+
 ## Design notes
 
 - Design tokens live at the top of `assets/css/style.css`. Change `--brand` and `--brand-2` and the whole site follows.
