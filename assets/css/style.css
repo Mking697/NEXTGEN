@@ -589,11 +589,19 @@ main:focus{outline:none}
   border-radius:14px;font-size:.88rem;background:rgba(91,124,255,.06);
 }
 
-/* ---------- 29. Image logo mark ----------
-   The emblem is a wide, shallow arc. Boxing it into a square tile clipped it
-   and pulled in neighbouring artwork, so it keeps its natural aspect here. */
+/* ---------- 29. Logo lockup ----------
+   The full horizontal lockup (emblem + wordmark) is one image, so the brand
+   name is not duplicated as adjacent text. Width is intrinsic; only the
+   height is set, which keeps the aspect ratio at every breakpoint. */
 .logo-img{
-  height:40px;width:auto;flex:none;display:block;
+  height:44px;width:auto;flex:none;display:block;
   object-fit:contain;background:none;border:0;box-shadow:none;padding:0;
 }
+@media(max-width:940px){.logo-img{height:40px}}
 @media(max-width:520px){.logo-img{height:34px}}
+
+.admin-tag{
+  font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--text-faint);border-left:1px solid var(--line-strong);
+  padding-left:11px;margin-left:2px;
+}
