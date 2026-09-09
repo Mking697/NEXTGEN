@@ -1,0 +1,24 @@
+{
+  "hero_pill": "7 products built · 5 already live",
+  "hero_title": "Software and marketing that run the boring half of your business",
+  "hero_sub": "Next Gen Automation builds ready-to-use business software — and runs the paid campaigns that fill it with customers. Seven products, five already live in production, plus a full-service ads and growth team behind them.",
+  "hero_cta_primary": "Book a Free Demo",
+  "hero_cta_secondary": "See Our Products",
+
+  "stats": [
+    { "value": "7", "label": "Products Built" },
+    { "value": "5", "label": "Live in Production" },
+    { "value": "24×7", "label": "Uptime Monitoring" },
+    { "value": "100%", "label": "Built In-house" }
+  ],
+
+  "trust_line": "Every product here was built, deployed and is maintained by our own team.",
+
+  "cta_title": "Not sure which one fits your business?",
+  "cta_sub": "A free 15-minute call. We will understand your process and tell you straight which product or service will help — and which one will not.",
+
+  "seo": {
+    "title": "Next Gen Automation — Business Software & Digital Marketing for Indian Businesses",
+    "description": "Ready-to-use business automation software plus Meta and Google Ads management, WhatsApp automation, landing pages and SEO. Five products live in production. Book a free demo."
+  }
+}

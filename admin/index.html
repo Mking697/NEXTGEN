@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Login — NextGen Business Automation</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#070A12">
+<link rel="icon" href="../assets/img/favicon.ico" sizes="any">
+<link rel="icon" href="../assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin">
+
+<div class="login-wrap">
+  <div class="login-card">
+
+    <a class="logo" href="../index.html">
+      <img class="logo-mark" src="../assets/img/icon-mark.png" alt="" width="40" height="40">
+      <span>NextGen<small>Business Automation</small></span>
+    </a>
+
+    <form class="form-card" id="loginForm" novalidate>
+      <div class="center" style="margin-bottom:24px">
+        <h1 style="font-size:1.5rem;margin-bottom:6px">Admin Panel</h1>
+        <span class="mode-tag" id="modeTag">checking...</span>
+      </div>
+
+      <div class="alert alert-ok" id="loginOk" role="status" aria-live="polite" aria-atomic="true"></div>
+      <div class="alert alert-err" id="loginErr" role="alert" aria-atomic="true"></div>
+
+      <div class="field" id="emailField">
+        <label for="email">Email</label>
+        <input class="input" id="email" name="email" type="email" placeholder="admin@nextgenauto.online" autocomplete="username">
+      </div>
+
+      <div class="field">
+        <label for="password" id="passLabel">Password</label>
+        <input class="input" id="password" name="password" type="password" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+
+      <button class="btn btn-primary btn-block btn-lg" type="submit" id="loginBtn">Log in</button>
+
+      <p class="form-note center" style="margin-top:18px">
+        <a href="../index.html" style="color:var(--brand-2)">&larr; Back to website</a>
+      </p>
+    </form>
+
+    <p class="center" style="margin-top:20px;font-size:.8rem;color:var(--text-faint);max-width:380px;margin-inline:auto">
+      This page is hidden from search engines. For extra security, add password protection to the
+      <code>/admin</code> folder from your Hostinger hPanel as well.
+    </p>
+
+  </div>
+</div>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/store.js"></script>
+<script src="../assets/js/icons.js"></script>
+<script>
+(function () {
+  var S = window.NGA_Store;
+  var form = document.getElementById("loginForm");
+  var okBox = document.getElementById("loginOk");
+  var errBox = document.getElementById("loginErr");
+  var btn = document.getElementById("loginBtn");
+  var tag = document.getElementById("modeTag");
+  var emailField = document.getElementById("emailField");
+  var passLabel = document.getElementById("passLabel");
+  var passInput = document.getElementById("password");
+
+  if (S.LIVE) {
+    tag.className = "mode-tag mode-live";
+    tag.textContent = "Live mode · Supabase";
+  } else {
+    tag.className = "mode-tag mode-json";
+    tag.textContent = "Demo mode · local only";
+    emailField.style.display = "none";
+    passLabel.textContent = "Passcode";
+    passInput.setAttribute("placeholder", "demo passcode");
+  }
+
+  // Already signed in? Go straight through.
+  S.auth.current().then(function (u) { if (u) location.replace("dashboard.html"); });
+
+  /* The live region has to already be rendered when its text changes,
+     otherwise a screen reader never announces it. */
+  function say(msg, ok, field) {
+    [okBox, errBox].forEach(function (b) { b.classList.remove("show"); b.textContent = ""; });
+    var box = ok ? okBox : errBox;
+    box.classList.add("show");
+    requestAnimationFrame(function () { box.textContent = msg; });
+    if (!ok && field) {
+      field.setAttribute("aria-invalid", "true");
+      field.setAttribute("aria-describedby", "loginErr");
+      field.focus();
+    }
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    [okBox, errBox].forEach(function (b) { b.classList.remove("show"); b.textContent = ""; });
+    document.getElementById("email").removeAttribute("aria-invalid");
+    passInput.removeAttribute("aria-invalid");
+
+    var email = document.getElementById("email").value.trim();
+    var pass = passInput.value;
+
+    if (S.LIVE && !email) return say("Please enter your email.", false, document.getElementById("email"));
+    if (!pass) return say("Please enter your password.", false, passInput);
+
+    btn.disabled = true; btn.textContent = "Checking...";
+
+    S.auth.signIn(email, pass).then(function () {
+      location.href = "dashboard.html";
+    }).catch(function (err) {
+      say(err.message || "Login failed.", false, passInput);
+      btn.disabled = false; btn.textContent = "Log in";
+    });
+  });
+})();
+</script>
+</body>
+</html>

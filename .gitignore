@@ -1,0 +1,23 @@
+# Claude Code tooling — not part of the website
+.claude/
+.mcp.json
+
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# Local scratch
+*.log
+scratchpad/
+
+# Never commit real secrets. config.js IS tracked on purpose: it only holds
+# public values (site URL, phone, and the Supabase anon key, which is safe to
+# publish because Row Level Security enforces access). If you ever add a
+# service_role key or an SMTP password, put it in one of these instead:
+.env
+.env.*
+secrets.json

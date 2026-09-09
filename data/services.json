@@ -1,0 +1,212 @@
+[
+  {
+    "id": "s1",
+    "slug": "meta-ads-management",
+    "name": "Meta Ads Management",
+    "tagline": "Facebook & Instagram ads that bring enquiries, not just likes",
+    "category": "Paid Advertising",
+    "icon": "target",
+    "color_from": "#5B7CFF",
+    "color_to": "#22D3EE",
+    "description": "End-to-end Facebook and Instagram advertising — from audience research and creative production to daily optimisation and honest reporting.",
+    "long_description": "Most businesses do not lose money on ads because the platform is bad. They lose it because the offer is unclear, the targeting is lazy, and nobody checks the numbers after the campaign goes live. We handle all three. You get a proper account structure, creatives built for your audience, and a weekly report that shows exactly what each rupee bought.",
+    "deliverables": [
+      "Ad account and Business Manager setup",
+      "Pixel and conversion tracking installation",
+      "Audience research and targeting strategy",
+      "Ad creative design and copywriting",
+      "Campaign launch and daily optimisation",
+      "Weekly performance report with cost per lead"
+    ],
+    "outcomes": [
+      "Every enquiry is tracked back to the campaign that produced it",
+      "Creative is tested systematically instead of changed on a hunch",
+      "You always know your cost per lead, not just your ad spend"
+    ],
+    "price": "",
+    "price_note": "Monthly retainer + ad spend. Quoted after a free audit.",
+    "published": true,
+    "featured": true,
+    "sort_order": 1
+  },
+  {
+    "id": "s2",
+    "slug": "google-ads-management",
+    "name": "Google Ads Management",
+    "tagline": "Catch customers at the exact moment they are searching",
+    "category": "Paid Advertising",
+    "icon": "chart",
+    "color_from": "#22D3EE",
+    "color_to": "#34D399",
+    "description": "Search, Performance Max and YouTube campaigns built around high-intent keywords — with wasted spend cut out through disciplined negative keyword work.",
+    "long_description": "Google Ads is the highest-intent traffic you can buy. It is also the easiest place to burn a budget on irrelevant clicks. We build tight campaign structures, run search term reviews every week, and keep the negative keyword list growing so your budget stays on the searches that actually convert.",
+    "deliverables": [
+      "Keyword research and competitor analysis",
+      "Search, Shopping and Performance Max campaign setup",
+      "Conversion tracking and call tracking",
+      "Ad copy writing and extension setup",
+      "Weekly search term review and negative keywords",
+      "Landing page recommendations"
+    ],
+    "outcomes": [
+      "Budget goes to buying-intent searches, not window shoppers",
+      "Calls and form fills are tracked as real conversions",
+      "Wasted spend shrinks month over month"
+    ],
+    "price": "",
+    "price_note": "Monthly retainer + ad spend. Quoted after a free audit.",
+    "published": true,
+    "featured": true,
+    "sort_order": 2
+  },
+  {
+    "id": "s3",
+    "slug": "whatsapp-marketing-setup",
+    "name": "WhatsApp Marketing & Automation",
+    "tagline": "Turn your busiest channel into a system that never drops a lead",
+    "category": "Marketing Automation",
+    "icon": "chat",
+    "color_from": "#25D366",
+    "color_to": "#0EA5E9",
+    "description": "WhatsApp Business API setup, chatbot flows, broadcast campaigns and a shared team inbox — powered by our own ChatXFlow platform.",
+    "long_description": "Your customers already message you on WhatsApp. The problem is that replies get missed, follow-ups never happen, and nobody knows how many enquiries turned into sales. We set up the API, build the automated flows, train your team on the shared inbox, and connect it all so every chat becomes a trackable lead.",
+    "deliverables": [
+      "WhatsApp Business API account and number verification",
+      "Chatbot and auto-reply flow design",
+      "Broadcast campaign setup and template approval",
+      "Shared team inbox with agent routing",
+      "CRM and lead capture integration",
+      "Team training and handover"
+    ],
+    "outcomes": [
+      "Instant replies even outside business hours",
+      "Every conversation is logged and assigned to someone",
+      "Follow-ups happen automatically instead of being forgotten"
+    ],
+    "price": "",
+    "price_note": "One-time setup + monthly platform fee",
+    "published": true,
+    "featured": true,
+    "sort_order": 3
+  },
+  {
+    "id": "s4",
+    "slug": "landing-page-development",
+    "name": "Landing Pages & Websites",
+    "tagline": "Fast, conversion-focused pages built to receive paid traffic",
+    "category": "Web Development",
+    "icon": "zap",
+    "color_from": "#A855F7",
+    "color_to": "#5B7CFF",
+    "description": "High-converting landing pages and business websites — fast-loading, mobile-first, and wired for conversion tracking from day one.",
+    "long_description": "Sending paid traffic to a slow, generic website is the most common way to waste an ad budget. We build pages designed for one job: turn a visitor who has never heard of you into an enquiry. Clear promise above the fold, proof, and a single obvious next step — loading in under two seconds on an average phone.",
+    "deliverables": [
+      "Conversion-focused page structure and copywriting",
+      "Custom design matched to your brand",
+      "Mobile-first responsive build",
+      "Pixel, GA4 and conversion event setup",
+      "Speed and Core Web Vitals optimisation",
+      "Hosting setup and go-live support"
+    ],
+    "outcomes": [
+      "Ad traffic lands on a page built to convert, not just to exist",
+      "Every form fill and call fires a tracked conversion event",
+      "Pages load fast enough that people do not bounce first"
+    ],
+    "price": "",
+    "price_note": "Fixed project price. Quoted after scoping.",
+    "published": true,
+    "featured": true,
+    "sort_order": 4
+  },
+  {
+    "id": "s5",
+    "slug": "creative-design",
+    "name": "Ad Creative & Branding",
+    "tagline": "The creative decides whether your ad gets scrolled past",
+    "category": "Creative",
+    "icon": "sliders",
+    "color_from": "#F87171",
+    "color_to": "#A855F7",
+    "description": "Scroll-stopping static and video ad creative, plus the brand basics — logo, colours and templates — that make everything look like one company.",
+    "long_description": "Targeting gets you in front of the right person. Creative decides whether they stop. We produce ad variations built to be tested against each other, in the formats each placement actually needs, so you learn what works instead of guessing.",
+    "deliverables": [
+      "Static ad creative in all required placement sizes",
+      "Short-form video and reel editing",
+      "Ad copy variations for testing",
+      "Logo and brand identity basics",
+      "Reusable social media templates",
+      "Monthly creative refresh"
+    ],
+    "outcomes": [
+      "Multiple angles tested instead of one guess",
+      "Creative fatigue is caught and refreshed before results drop",
+      "Every asset looks like it came from the same company"
+    ],
+    "price": "",
+    "price_note": "Per-project or bundled with an ads retainer",
+    "published": true,
+    "featured": false,
+    "sort_order": 5
+  },
+  {
+    "id": "s6",
+    "slug": "seo-and-content",
+    "name": "SEO & Content",
+    "tagline": "Traffic that keeps coming after you stop paying for it",
+    "category": "Organic Growth",
+    "icon": "refresh",
+    "color_from": "#34D399",
+    "color_to": "#22D3EE",
+    "description": "Technical SEO, local search and content that builds a traffic source you own — so you are not dependent on ad spend forever.",
+    "long_description": "Paid ads stop the day you stop paying. SEO compounds. We fix the technical foundation, build out your Google Business Profile for local searches, and publish content that answers what your customers actually type into Google. It is slower than ads, which is exactly why it is worth starting now.",
+    "deliverables": [
+      "Technical SEO audit and fixes",
+      "Keyword research and content plan",
+      "On-page optimisation",
+      "Google Business Profile and local SEO",
+      "Content writing and publishing",
+      "Monthly ranking and traffic report"
+    ],
+    "outcomes": [
+      "A traffic source that does not switch off with your budget",
+      "Local searches near your business start finding you",
+      "Content that answers real customer questions"
+    ],
+    "price": "",
+    "price_note": "Monthly retainer, minimum 6 months",
+    "published": true,
+    "featured": false,
+    "sort_order": 6
+  },
+  {
+    "id": "s7",
+    "slug": "custom-software-development",
+    "name": "Custom Software Development",
+    "tagline": "When nothing off the shelf fits how you actually work",
+    "category": "Development",
+    "icon": "tool",
+    "color_from": "#F59E0B",
+    "color_to": "#F87171",
+    "description": "Custom web applications, dashboards, integrations and automations — built by the same team that built and runs our own products.",
+    "long_description": "Sometimes your process is genuinely different and forcing it into standard software costs more than it saves. We build custom systems on the same foundations as our own live products, so you get something proven rather than an experiment. And we tell you honestly when one of our existing products would do the job cheaper.",
+    "deliverables": [
+      "Requirement mapping and technical scoping",
+      "Custom web application development",
+      "Third-party API and payment integrations",
+      "Reporting dashboards",
+      "Deployment, hosting and monitoring",
+      "Ongoing maintenance and support"
+    ],
+    "outcomes": [
+      "Software that matches your process instead of the other way round",
+      "One source of truth instead of scattered spreadsheets",
+      "A team that stays available after go-live"
+    ],
+    "price": "",
+    "price_note": "Fixed price per milestone, after scoping",
+    "published": true,
+    "featured": false,
+    "sort_order": 7
+  }
+]
