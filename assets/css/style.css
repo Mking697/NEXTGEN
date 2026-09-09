@@ -589,8 +589,11 @@ main:focus{outline:none}
   border-radius:14px;font-size:.88rem;background:rgba(91,124,255,.06);
 }
 
-/* ---------- 29. Image logo mark ---------- */
-img.logo-mark{
-  background:rgba(255,255,255,.05);border:1px solid var(--line-strong);
-  box-shadow:none;object-fit:contain;padding:3px;
+/* ---------- 29. Image logo mark ----------
+   The emblem is a wide, shallow arc. Boxing it into a square tile clipped it
+   and pulled in neighbouring artwork, so it keeps its natural aspect here. */
+.logo-img{
+  height:40px;width:auto;flex:none;display:block;
+  object-fit:contain;background:none;border:0;box-shadow:none;padding:0;
 }
+@media(max-width:520px){.logo-img{height:34px}}

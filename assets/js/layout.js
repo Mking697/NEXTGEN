@@ -15,7 +15,7 @@
   '<header class="nav">' +
     '<div class="wrap">' +
       '<a class="logo" href="' + R + 'index.html" aria-label="NextGen Business Automation home">' +
-        '<img class="logo-mark" src="' + R + 'assets/img/icon-mark.png" alt="" width="40" height="40" decoding="async">' +
+        '<img class="logo-img" src="' + R + 'assets/img/icon-mark.png" alt="" width="64" height="40" decoding="async">' +
         '<span>NextGen<small>Business Automation</small></span>' +
       '</a>' +
       '<nav class="nav-links" id="navlinks" aria-label="Main">' +
@@ -48,7 +48,7 @@
 
         '<div class="footer-brand">' +
           '<a class="logo" href="' + R + 'index.html">' +
-            '<img class="logo-mark" src="' + R + 'assets/img/icon-mark.png" alt="" width="40" height="40" decoding="async">' +
+            '<img class="logo-img" src="' + R + 'assets/img/icon-mark.png" alt="" width="64" height="40" decoding="async">' +
             '<span>NextGen<small>Business Automation</small></span>' +
           '</a>' +
           '<p>Business software built, deployed and maintained in-house &mdash; plus the marketing team that fills it with customers.</p>' +
