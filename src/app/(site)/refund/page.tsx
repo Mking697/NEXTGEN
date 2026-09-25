@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default async function RefundPage() {
   const { contact } = await getSettings();
   const tel = `tel:${contact.phone.replace(/\s/g, "")}`;
+  const tel2 = `tel:${(contact.phone2 ?? "").replace(/\s/g, "")}`;
 
   return (
     <LegalPage title="Refund &amp; Cancellation Policy">
@@ -77,7 +78,7 @@ export default async function RefundPage() {
       <h2>8. Contact</h2>
       <p>
         Email: <a href={`mailto:${contact.email}`}>{contact.email}</a><br />
-        Phone / WhatsApp: <a href={tel}>{contact.phone}</a><br />
+        Phone / WhatsApp: <a href={tel}>{contact.phone}</a>{contact.phone2 && <> · <a href={tel2}>{contact.phone2}</a></>}<br />
         {contact.hours}
       </p>
 

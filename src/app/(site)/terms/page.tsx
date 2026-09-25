@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 export default async function TermsPage() {
   const { contact, brand } = await getSettings();
   const tel = `tel:${contact.phone.replace(/\s/g, "")}`;
+  const tel2 = `tel:${(contact.phone2 ?? "").replace(/\s/g, "")}`;
 
   return (
     <LegalPage title="Terms &amp; Conditions">
@@ -107,7 +108,7 @@ export default async function TermsPage() {
       <p>
         <strong>{brand.name}</strong><br />
         Email: <a href={`mailto:${contact.email}`}>{contact.email}</a><br />
-        Phone: <a href={tel}>{contact.phone}</a>
+        Phone: <a href={tel}>{contact.phone}</a>{contact.phone2 && <> · <a href={tel2}>{contact.phone2}</a></>}
       </p>
 
       <p className="note">

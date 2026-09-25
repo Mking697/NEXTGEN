@@ -37,6 +37,14 @@ export default async function ThankYouPage() {
           <a className="text-brand-ink underline underline-offset-4" href={`tel:${contact.phone.replace(/\s/g, "")}`}>
             {contact.phone}
           </a>
+          {contact.phone2 && (
+            <>
+              {" or "}
+              <a className="text-brand-ink underline underline-offset-4" href={`tel:${contact.phone2.replace(/\s/g, "")}`}>
+                {contact.phone2}
+              </a>
+            </>
+          )}
         </p>
       </div>
     </section>

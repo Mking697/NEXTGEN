@@ -182,6 +182,11 @@ export default async function HomePage() {
               <Button asChild size="lg" variant="outline" className="border-white/35 bg-transparent text-white hover:bg-white/10 hover:text-white">
                 <a href={`tel:${contact.phone.replace(/\s/g, "")}`}>Call {contact.phone}</a>
               </Button>
+              {contact.phone2 && (
+                <Button asChild size="lg" variant="outline" className="border-white/35 bg-transparent text-white hover:bg-white/10 hover:text-white">
+                  <a href={`tel:${contact.phone2.replace(/\s/g, "")}`}>Call {contact.phone2}</a>
+                </Button>
+              )}
             </div>
           </div>
         </Reveal>
@@ -362,6 +367,12 @@ export default async function HomePage() {
               </Button>
               <p className="text-[0.92rem] text-muted-foreground">
                 Call <a className="text-brand-ink underline underline-offset-4" href={`tel:${contact.phone.replace(/\s/g, "")}`}>{contact.phone}</a>
+                {contact.phone2 && (
+                  <>
+                    {" · "}
+                    <a className="text-brand-ink underline underline-offset-4" href={`tel:${contact.phone2.replace(/\s/g, "")}`}>{contact.phone2}</a>
+                  </>
+                )}
                 {" · "}
                 <a className="text-brand-ink underline underline-offset-4" href={`mailto:${contact.email}`}>{contact.email}</a>
               </p>

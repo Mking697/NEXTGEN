@@ -22,6 +22,7 @@ export default async function ContactPage({
   ]);
   const { contact } = settings;
   const tel = `tel:${contact.phone.replace(/\s/g, "")}`;
+  const tel2 = contact.phone2 ? `tel:${contact.phone2.replace(/\s/g, "")}` : null;
   const wa = waLink(contact.whatsapp, "Hi, I would like to talk about my business.");
 
   return (
@@ -55,6 +56,9 @@ export default async function ContactPage({
                 tone="bg-wa/15 border-wa/30 text-wa-ink"
               />
               <ContactCard href={tel} Icon={Phone} title={contact.phone} sub={contact.hours} />
+              {tel2 && contact.phone2 && (
+                <ContactCard href={tel2} Icon={Phone} title={contact.phone2} sub={contact.hours} />
+              )}
               <ContactCard
                 href={`mailto:${contact.email}`} Icon={Mail}
                 title={contact.email} sub="Best for anything you need to write out in detail"
