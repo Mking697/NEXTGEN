@@ -1,5 +1,5 @@
 /* ============================================================
-   NEXT GEN AUTOMATION — Site Configuration
+   ESSOR AUTOMATIONS — Site Configuration
    ------------------------------------------------------------
    This is the only file you normally need to edit.
    ============================================================ */
@@ -8,11 +8,11 @@ window.NGA_CONFIG = {
 
   /* ---------- 1. BRAND ---------- */
   brand: {
-    name: "NextGen Business Automation",
-    short: "NextGen",
+    name: "Essor Automations",
+    short: "Essor",
     tagline: "Business Automation, Built & Delivered",
-    domain: "nextgenauto.online",
-    url: "https://nextgenauto.online"        // https, no trailing slash
+    domain: "essorautomations.in",
+    url: "https://essorautomations.in"        // https, no trailing slash
   },
 
   /* ---------- 2. CONTACT ---------- */
@@ -67,6 +67,6 @@ window.NGA_CONFIG = {
     // Ignored once Supabase is configured — a real login is used instead.
     // This is only for local preview. Change it, and rely on hPanel
     // Directory Privacy for real protection.
-    demoPasscode: "nga@2026"
+    demoPasscode: "essor@2026"
   }
 };

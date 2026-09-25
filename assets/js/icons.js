@@ -1,5 +1,5 @@
 /* ============================================================
-   NEXT GEN AUTOMATION — SVG icon set
+   ESSOR AUTOMATIONS — SVG icon set
    Emoji ki jagah proper stroke icons (24x24, currentColor).
    Use: <span data-icon="zap"></span>
    ============================================================ */

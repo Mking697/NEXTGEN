@@ -1,5 +1,5 @@
 /* ============================================================
-   NEXT GEN AUTOMATION — Data Layer
+   ESSOR AUTOMATIONS — Data Layer
    One API, two backends:
      A) Supabase configured  -> live read + admin write
      B) Not configured       -> reads data/*.json (site keeps working)

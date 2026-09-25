@@ -1,5 +1,5 @@
 /* ============================================================
-   NEXT GEN AUTOMATION — Site behaviour
+   ESSOR AUTOMATIONS — Site behaviour
    ============================================================ */
 (function (w, d) {
   "use strict";
@@ -43,7 +43,7 @@
     }
     if (problems.length) {
       console.warn(
-        "%c[Next Gen Automation] Site is not launch-ready yet:\n" +
+        "%c[Essor Automations] Site is not launch-ready yet:\n" +
         problems.map(function (p, i) { return "  " + (i + 1) + ". " + p; }).join("\n") +
         "\n\nFix these in assets/js/config.js before running any paid campaign.",
         "color:#FBBF24;font-weight:bold"
@@ -159,8 +159,11 @@
 
     var here = location.pathname.split("/").pop() || "index.html";
     $$(".nav-links a").forEach(function (a) {
-      var href = (a.getAttribute("href") || "").split("#")[0];
-      if (href && href === here) {
+      var raw = a.getAttribute("href") || "";
+      // An in-page anchor like index.html#why points at a section, not the
+      // page, so it must not also light up as the current page.
+      if (raw.indexOf("#") > -1) return;
+      if (raw && raw === here) {
         a.classList.add("active");
         a.setAttribute("aria-current", "page");
       }

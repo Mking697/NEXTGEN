@@ -1,5 +1,5 @@
 -- ============================================================
--- NEXT GEN AUTOMATION — Supabase schema
+-- ESSOR AUTOMATIONS — Supabase schema
 -- ------------------------------------------------------------
 -- How to run this:
 --   1. Create a project at supabase.com

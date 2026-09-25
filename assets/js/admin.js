@@ -1,5 +1,5 @@
 /* ============================================================
-   NEXT GEN AUTOMATION — Admin Panel logic
+   ESSOR AUTOMATIONS — Admin Panel logic
    Handles both collections: products and services.
    ============================================================ */
 (function (w, d) {

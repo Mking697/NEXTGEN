@@ -21,3 +21,6 @@ scratchpad/
 .env
 .env.*
 secrets.json
+
+# Logo source masters (large originals, not served by the site)
+brand/

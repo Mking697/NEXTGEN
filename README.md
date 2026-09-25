@@ -1,6 +1,6 @@
-# NextGen Business Automation — Website
+# Essor Automations — Website
 
-Static marketing site for NextGen Business Automation. Plain HTML, CSS and vanilla JavaScript — **no build step**, no framework. Upload the folder to Hostinger and it runs.
+Static marketing site for Essor Automations. Plain HTML, CSS and vanilla JavaScript — **no build step**, no framework. Upload the folder to Hostinger and it runs.
 
 It sells two things:
 
@@ -19,7 +19,7 @@ The site is built, but it is **not launch-ready** until you fill in `assets/js/c
 | 2 | `tracking.metaPixelId` | Empty, so no `PageView` and no `Lead` events fire. Meta cannot optimise, retarget, or build a lookalike. You would be buying cold traffic blind. |
 | 3 | `supabase.url` + `supabase.anonKey` | Without these, leads are not stored anywhere. |
 | 4 | Legal pages | `privacy.html`, `terms.html`, `refund.html` are templates. Add your registered company name, address and GSTIN. |
-| 5 | Domain | Replace `nextgenauto.online` in `sitemap.xml` and in each page's `<link rel="canonical">` and `og:` tags. |
+| 5 | Domain | Replace `essorautomations.in` in `sitemap.xml` and in each page's `<link rel="canonical">` and `og:` tags. |
 
 Fix 1 and 2 first. Nothing else matters until a submitted form produces a lead you can actually retrieve.
 
@@ -131,8 +131,8 @@ changed image will not reach visitors on its own. Asset filenames therefore
 carry a version suffix:
 
 ```
-assets/img/logo-horizontal.v2.png
-assets/img/favicon-32.v2.png
+assets/img/logo-wide.v1.png
+assets/img/favicon-32.v1.png
 ```
 
 **To replace any image:** save it with the next suffix (`.v3.png`), update the

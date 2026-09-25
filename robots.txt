@@ -4,4 +4,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /admin
 
-Sitemap: https://nextgenauto.online/sitemap.xml
+Sitemap: https://essorautomations.in/sitemap.xml

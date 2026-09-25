@@ -1,5 +1,5 @@
 /* ============================================================
-   NEXT GEN AUTOMATION — Shared Nav + Footer
+   ESSOR AUTOMATIONS — Shared Nav + Footer
    Edit here once, and it applies across the whole site.
    Usage: put <div data-nav></div> and <div data-footer></div> in a page.
    ============================================================ */
@@ -14,8 +14,8 @@
   var NAV =
   '<header class="nav">' +
     '<div class="wrap">' +
-      '<a class="logo" href="' + R + 'index.html" aria-label="NextGen Business Automation home">' +
-        '<img class="logo-img" src="' + R + 'assets/img/logo-horizontal.v2.png" alt="NextGen Business Automation" width="1158" height="200" decoding="async">' +
+      '<a class="logo" href="' + R + 'index.html" aria-label="Essor Automations home">' +
+        '<img class="logo-img" src="' + R + 'assets/img/logo-wide.v1.png" alt="Essor Automations" width="1158" height="200" decoding="async">' +
       '</a>' +
       '<nav class="nav-links" id="navlinks" aria-label="Main">' +
         '<a href="' + R + 'index.html">Home</a>' +
@@ -26,8 +26,8 @@
         '<a href="' + R + 'contact.html">Contact</a>' +
       '</nav>' +
       '<div class="nav-cta">' +
-        '<a class="btn btn-ghost btn-sm" data-cfg-href="whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>' +
-        '<a class="btn btn-primary btn-sm nav-cta-keep" href="' + R + 'contact.html">Free Demo</a>' +
+        '<a class="btn btn-ghost btn-sm" href="' + R + 'contact.html">Free Demo</a>' +
+        '<a class="btn btn-wa btn-sm nav-cta-keep" data-cfg-href="whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>' +
         '<button class="burger" aria-label="Menu" aria-controls="navlinks" aria-expanded="false"><span></span></button>' +
       '</div>' +
     '</div>' +
@@ -46,8 +46,8 @@
       '<div class="footer-grid">' +
 
         '<div class="footer-brand">' +
-          '<a class="logo" href="' + R + 'index.html" aria-label="NextGen Business Automation home">' +
-            '<img class="logo-img" src="' + R + 'assets/img/logo-horizontal.v2.png" alt="NextGen Business Automation" width="1158" height="200" decoding="async">' +
+          '<a class="logo" href="' + R + 'index.html" aria-label="Essor Automations home">' +
+            '<img class="logo-img" src="' + R + 'assets/img/logo-wide.v1.png" alt="Essor Automations" width="1158" height="200" decoding="async">' +
           '</a>' +
           '<p>Business software built, deployed and maintained in-house &mdash; plus the marketing team that fills it with customers.</p>' +
           '<div class="socials">' +
@@ -82,7 +82,7 @@
           '<h4>Company</h4>' +
           '<ul>' +
             '<li><a href="' + R + 'about.html">About Us</a></li>' +
-            '<li><a href="' + R + 'index.html#why">Why Next Gen</a></li>' +
+            '<li><a href="' + R + 'index.html#why">Why Essor</a></li>' +
             '<li><a href="' + R + 'index.html#how">How It Works</a></li>' +
             '<li><a href="' + R + 'index.html#faq">FAQ</a></li>' +
             '<li><a href="' + R + 'contact.html">Contact</a></li>' +

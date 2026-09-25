@@ -1,5 +1,5 @@
 /* ============================================================
-   NEXT GEN AUTOMATION — Catalog rendering
+   ESSOR AUTOMATIONS — Catalog rendering
    Renders both collections:
      products -> [data-product-grid] / [data-product-detail]
      services -> [data-service-grid] / [data-service-detail]
@@ -61,8 +61,9 @@
 
     return '' +
       '<article class="p-card" data-reveal="' + ((i % 3) * 80) + '" data-cat="' + esc(p.category || "") + '">' +
+        '<span class="p-stripe" style="background:' + grad(p) + '" aria-hidden="true"></span>' +
         '<div class="p-top">' +
-          '<div class="p-logo" style="background:' + grad(p) + '">' +
+          '<div class="p-logo">' +
             esc(p.logo_text || (p.name || "?").slice(0, 2).toUpperCase()) + "</div>" +
           '<div class="p-title">' +
             "<h3>" + esc(p.name) + "</h3>" +
@@ -102,8 +103,7 @@
       '<article class="s-card" data-reveal="' + ((i % 3) * 80) + '" data-cat="' + esc(sv.category || "") + '">' +
         '<span class="s-stripe" style="background:' + grad(sv) + '" aria-hidden="true"></span>' +
         '<div class="s-head">' +
-          '<span class="s-ico" data-icon="' + esc(sv.icon || "zap") + '" ' +
-            'style="background:' + grad(sv) + '"></span>' +
+          '<span class="s-ico" data-icon="' + esc(sv.icon || "zap") + '"></span>' +
           "<div>" +
             '<div class="p-cat">' + esc(sv.category || "Service") + "</div>" +
             "<h3>" + esc(sv.name) + "</h3>" +
@@ -213,7 +213,7 @@
 
             "<div>" +
               '<div style="display:flex;align-items:center;gap:16px;margin-bottom:22px">' +
-                '<div class="p-logo" style="width:66px;height:66px;font-size:1.5rem;background:' + grad(p) + '">' +
+                '<div class="p-logo" style="width:66px;height:66px;font-size:1.5rem">' +
                   esc(p.logo_text || p.name.slice(0, 2).toUpperCase()) + "</div>" +
                 "<div>" +
                   '<span class="badge ' + s.cls + '">' +
@@ -285,7 +285,7 @@
             "<div>" +
               '<div style="display:flex;align-items:center;gap:16px;margin-bottom:22px">' +
                 '<span class="s-ico" data-icon="' + esc(sv.icon || "zap") +
-                  '" style="width:64px;height:64px;background:' + grad(sv) + '"></span>' +
+                  '" style="width:64px;height:64px"></span>' +
                 '<div class="p-cat">' + esc(sv.category || "Service") + "</div>" +
               "</div>" +
               "<h1>" + esc(sv.name) + "</h1>" +
