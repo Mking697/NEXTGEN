@@ -27,8 +27,16 @@ The admin needs this before it can store anything.
 2. **SQL Editor → New query** → paste all of `supabase-schema.sql` → **Run**.
    It creates the tables, the Row Level Security policies and the starter rows,
    and is safe to run more than once.
-3. **Settings → API** → copy the **Project URL** and the **anon** key.
-4. Put them in `.env.local` for local work, and in
+3. **Authentication → Users → Add user** — create your admin login with
+   **Auto Confirm User** switched on. That email and password is what
+   `/admin/login` accepts. Copy the **User UID** shown afterwards.
+4. **Authentication → Sign In / Providers → Email** → switch
+   **"Allow new users to sign up"** **off**. Left on, a stranger can create
+   themselves an account on your project.
+5. **SQL Editor** → run `supabase-admin-lockdown.sql`, with the UID from step 3
+   in its `insert into public.admins` line. Do not skip this — see below.
+6. **Settings → API** → copy the **Project URL** and the **anon** key.
+7. Put them in `.env.local` for local work, and in
    **Vercel → Settings → Environment Variables** for production:
 
    ```
@@ -37,14 +45,20 @@ The admin needs this before it can store anything.
    NEXT_PUBLIC_SITE_URL=https://essorautomations.in
    ```
 
-5. **Authentication → Users → Add user** — create your admin login with
-   **Auto Confirm User** switched on. That email and password is what
-   `/admin/login` accepts.
-
 The anon key is meant to be public; it ships in the browser on every Supabase
-site. What actually protects the data is the RLS policies in the schema — in
-particular, `anon` can *insert* a lead but has no `select` policy at all, so the
-enquiry list cannot be read by the public.
+site. What actually protects the data is Row Level Security, and two rules do
+the work. `anon` can *insert* a lead but has no `select` policy at all, so the
+enquiry list cannot be read by the public. And after the lockdown script, the
+admin policies test membership of the `admins` table rather than merely that
+the request is logged in — granting to `authenticated` on its own is not a
+control, because "authenticated" includes anybody who signed themselves up.
+
+To add another admin later, create the user, then insert their UID into
+`public.admins`. To revoke one, delete the row — the account can still log in
+but will see nothing.
+
+Never put the **service_role** (secret) key anywhere in this project. It
+bypasses RLS completely and nothing here needs it.
 
 ---
 

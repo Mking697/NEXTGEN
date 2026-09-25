@@ -136,6 +136,13 @@ create trigger settings_touch before update on public.settings
 -- 6. ROW LEVEL SECURITY
 --    The anon key ships in the browser, so these policies are what
 --    actually protect the data — not the key.
+--
+--    IMPORTANT: the admin policies below grant access to the whole
+--    `authenticated` role, i.e. to anyone who is logged in. Supabase leaves
+--    public signup ON by default, so on its own that means a stranger could
+--    sign up and inherit your admin. Run `supabase-admin-lockdown.sql` after
+--    this file — it replaces each of those policies with an allow-list check
+--    so access belongs to named user IDs, not to "logged in".
 -- ============================================================
 alter table public.products enable row level security;
 alter table public.services enable row level security;
