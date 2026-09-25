@@ -914,3 +914,23 @@ main:focus{outline:none}
   .ticker-toggle{right:10px;padding:5px 10px}
   .ticker-toggle-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 }
+
+/* ---- 30i. Hero mesh gradient (WebGL) ----
+   Ported from a 21st.dev shader component. mesh.js refuses to start on
+   reduced-motion, save-data, a 2-core device or without WebGL, so the CSS
+   wash underneath has to stand on its own — it is the default, not a
+   fallback bolted on afterwards. */
+.hero{
+  background:
+    radial-gradient(1100px 520px at 88% -10%, rgba(248,0,0,.07), transparent 62%),
+    radial-gradient(760px 420px at 4% 8%, rgba(198,0,0,.045), transparent 60%),
+    var(--bg-hero);
+}
+.hero-mesh{
+  position:absolute;inset:0;width:100%;height:100%;
+  z-index:0;pointer-events:none;opacity:.85;
+  /* multiply keeps the wash from washing out the near-black headline */
+  mix-blend-mode:multiply;
+}
+.hero-mesh[data-shader^="skipped"]{display:none}
+@media(prefers-reduced-motion:reduce){.hero-mesh{display:none}}
