@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ============================================================
+   ESSOR AUTOMATIONS — brand theme
+   Values carried over from the audited static build: every text/background
+   pair here was contrast-checked against rendered pixels, not estimated.
+     #C60000  6.17:1 on white — fills that carry white text, and red text
+     #A30000  8.21:1 on white — links, hover/press, focus ring, small red
+     #F80000  4.21:1 — GRAPHICS ONLY (legal under 1.4.11, never text)
+     #616A78  5.47:1 on white and 4.83:1 on the band — the muted token.
+              #6B7280 is the usual pick and fails on the band at 4.35:1.
+     #767E8B  4.10:1 — control borders, which need 3:1 under 1.4.11
+   ============================================================ */
+:root{
+  --radius: 0.75rem;
+
+  --background:#FFFFFF;
+  --foreground:#0B0F14;
+  --card:#FFFFFF;
+  --card-foreground:#0B0F14;
+  --popover:#FFFFFF;
+  --popover-foreground:#0B0F14;
+
+  --primary:#C60000;
+  --primary-foreground:#FFFFFF;
+  --secondary:#F5F7FA;
+  --secondary-foreground:#0B0F14;
+  --muted:#EEF1F5;
+  --muted-foreground:#616A78;
+  --accent:#FFECEC;
+  --accent-foreground:#A30000;
+  --destructive:#B42318;
+  --destructive-foreground:#FFFFFF;
+
+  --border:#E3E7ED;
+  --input:#767E8B;
+  --ring:#A30000;
+
+  /* brand scale, used directly where a semantic token would lie */
+  --brand:#C60000;
+  --brand-ink:#A30000;
+  --brand-bright:#F80000;
+  --brand-tint:#FFECEC;
+  --brand-line:#F5C6C6;
+  --ink:#0B0F14;          /* the inverted slab: CTA bands and footer */
+  --ink-foreground:#FFFFFF;
+  --ink-dim:#B9C0CC;      /* 10.50:1 on --ink */
+  --ink-faint:#8E97A5;    /* 6.52:1 on --ink — --muted-foreground is 3.52:1 here and FAILS */
+  --ok:#0B7A43;  --ok-tint:#E7F7EE;  --ok-line:#A7DCC0;
+  --warn:#8A5200; --warn-tint:#FFF6E5; --warn-line:#E7C77A;
+  --wa:#25D366;  --wa-ink:#04220F;    /* white on this green is 1.98:1 — keep dark ink */
+
+  --chart-1:#C60000; --chart-2:#A30000; --chart-3:#0B7A43;
+  --chart-4:#8A5200; --chart-5:#616A78;
+
+  --sidebar:#FFFFFF;
+  --sidebar-foreground:#0B0F14;
+  --sidebar-primary:#C60000;
+  --sidebar-primary-foreground:#FFFFFF;
+  --sidebar-accent:#EEF1F5;
+  --sidebar-accent-foreground:#0B0F14;
+  --sidebar-border:#E3E7ED;
+  --sidebar-ring:#A30000;
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-bright: var(--brand-bright);
+  --color-brand-tint: var(--brand-tint);
+  --color-brand-line: var(--brand-line);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-dim: var(--ink-dim);
+  --color-ink-faint: var(--ink-faint);
+  --color-ok: var(--ok);
+  --color-ok-tint: var(--ok-tint);
+  --color-ok-line: var(--ok-line);
+  --color-warn: var(--warn);
+  --color-warn-tint: var(--warn-tint);
+  --color-warn-line: var(--warn-line);
+  --color-wa: var(--wa);
+  --color-wa-ink: var(--wa-ink);
+}
+
+@layer base{
+  *{ @apply border-border outline-ring/50; }
+  body{ @apply bg-background text-foreground antialiased; }
+  h1,h2,h3,h4{ text-wrap:balance; letter-spacing:-0.02em; }
+  p{ text-wrap:pretty; }
+  html{ scroll-behavior:smooth; scroll-padding-top:5.5rem; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{
+      animation-duration:.001ms!important;
+      animation-iteration-count:1!important;
+      transition-duration:.001ms!important;
+    }
+  }
+}
