@@ -160,3 +160,19 @@
     }
   }
 }
+
+/* Long-form legal and about copy. Body text here is full --foreground, not
+   --muted-foreground: reading a policy on white needs the full 19:1. */
+.prose-essor{ color: var(--foreground); }
+.prose-essor p{ margin-bottom: 1rem; line-height: 1.7; }
+.prose-essor h2{ margin-top: 2.2em; margin-bottom: .5em; font-size: clamp(1.35rem,2.4vw,1.7rem); font-weight: 800; }
+.prose-essor h3{ margin-top: 1.6em; margin-bottom: .4em; font-size: 1.1rem; font-weight: 700; }
+.prose-essor ul{ list-style: disc; padding-left: 1.3em; margin-bottom: 1rem; }
+.prose-essor ol{ list-style: decimal; padding-left: 1.3em; margin-bottom: 1rem; }
+.prose-essor li{ margin-bottom: .5em; line-height: 1.7; }
+.prose-essor a{ color: var(--brand-ink); text-decoration: underline; text-underline-offset: 3px; }
+.prose-essor strong{ font-weight: 700; }
+.prose-essor .note{
+  margin-top: 2.25rem; padding: 1rem 1.125rem; border: 1px solid var(--brand-line);
+  border-radius: 14px; background: var(--brand-tint); font-size: .88rem;
+}
