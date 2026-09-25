@@ -57,7 +57,9 @@ export default async function HomePage() {
               {hero.title_tail}
             </h1>
 
-            <p className="mt-5 max-w-[62ch] text-[clamp(1.02rem,1.5vw,1.18rem)] leading-relaxed text-muted-foreground">
+            {/* muted-strong, not muted-foreground: this paragraph sits directly
+                on the mesh, where #616A78 measures 3.24:1 and fails 1.4.3. */}
+            <p className="mt-5 max-w-[62ch] text-[clamp(1.02rem,1.5vw,1.18rem)] leading-relaxed text-muted-strong">
               {hero.subtitle}
             </p>
 

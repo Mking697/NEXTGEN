@@ -30,6 +30,7 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
+  --color-muted-strong: var(--muted-strong);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
@@ -75,6 +76,8 @@
   --secondary-foreground:#0B0F14;
   --muted:#EEF1F5;
   --muted-foreground:#616A78;
+  --muted-strong:#3A404A;   /* 6.18:1 on the hero mesh at its deepest;
+                               --muted-foreground is 3.24:1 there and FAILS */
   --accent:#FFECEC;
   --accent-foreground:#A30000;
   --destructive:#B42318;
