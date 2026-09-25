@@ -93,7 +93,27 @@
     steps.forEach(function (s) { io.observe(s); });
   }
 
-  /* ---------- 4. Report capability (dev only) ---------- */
+  /* ---------- 4. Ticker pause ---------- */
+  function initTicker() {
+    var btn = $("[data-ticker-toggle]");
+    if (!btn) return;
+    var wrap = btn.closest(".ticker-wrap");
+    var label = $(".ticker-toggle-label", btn);
+    if (reduced) { wrap.classList.add("paused"); }
+    function sync() {
+      var paused = wrap.classList.contains("paused");
+      btn.setAttribute("aria-pressed", paused ? "true" : "false");
+      if (label) label.textContent = paused ? "Play" : "Pause";
+      btn.setAttribute("aria-label", (paused ? "Resume" : "Pause") + " the scrolling list of live product domains");
+    }
+    btn.addEventListener("click", function () {
+      wrap.classList.toggle("paused");
+      sync();
+    });
+    sync();
+  }
+
+  /* ---------- 5. Report capability (dev only) ---------- */
   function report() {
     if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
       console.info(
@@ -104,7 +124,7 @@
     }
   }
 
-  function boot() { initProgress(); initVideo(); initRail(); report(); }
+  function boot() { initProgress(); initVideo(); initRail(); initTicker(); report(); }
 
   if (d.readyState === "loading") d.addEventListener("DOMContentLoaded", boot);
   else boot();

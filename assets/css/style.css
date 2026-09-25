@@ -84,7 +84,7 @@
 
 /* ---------- 2. Reset ---------- */
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-h) + 12px)}
 body{
   margin:0;font-family:var(--font);background:var(--bg);color:var(--text);
   line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased;
@@ -714,8 +714,10 @@ main:focus{outline:none}
   to{opacity:1;transform:none}
 }
 @media(max-width:720px){
-  .brand-stage{min-height:150vh}
-  .brand-video-wrap{width:min(66vmin,320px)}
+  /* One screen of pin, not one and a half — on a 24-viewport mobile page
+     every extra half-viewport of decoration is time the visitor does not have. */
+  .brand-stage{min-height:112vh}
+  .brand-video-wrap{width:min(62vmin,300px)}
 }
 
 /* ---- 30d. Sticky process rail ---- */
@@ -887,4 +889,28 @@ main:focus{outline:none}
   }
   .hero-swoosh{opacity:.10!important}
   .btn-primary::after{display:none}
+}
+
+/* ---- 30h. Ticker pause control ----
+   2.2.2 needs a real mechanism for motion that runs past 5s. Hover is not
+   one: it is unreachable by keyboard and meaningless on touch. */
+.ticker-wrap{position:relative}
+.ticker-toggle{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);z-index:2;
+  display:inline-flex;align-items:center;gap:7px;min-height:32px;padding:5px 13px;
+  border-radius:999px;border:1px solid var(--line-control);background:var(--bg);
+  color:var(--text-dim);font-size:.76rem;font-weight:700;cursor:pointer;
+  transition:.2s var(--ease);
+}
+.ticker-toggle:hover{color:var(--text);background:var(--surface-2)}
+.ticker-toggle-ico{width:9px;height:11px;flex:none;
+  border-left:3px solid currentColor;border-right:3px solid currentColor}
+.ticker-wrap.paused .ticker-toggle-ico{
+  border:0;width:0;height:0;
+  border-left:9px solid currentColor;border-top:6px solid transparent;border-bottom:6px solid transparent;
+}
+.ticker-wrap.paused .ticker-track{animation-play-state:paused}
+@media(max-width:560px){
+  .ticker-toggle{right:10px;padding:5px 10px}
+  .ticker-toggle-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 }

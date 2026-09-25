@@ -96,7 +96,7 @@
             '<a data-cfg-href="phone2" href="#"><span data-cfg="contact.phone2"></span></a><br>' +
             '<a data-cfg-href="email" href="#"><span data-cfg="contact.email"></span></a><br>' +
             '<span data-cfg="contact.address"></span><br>' +
-            '<span style="color:var(--text-faint);font-size:.85rem" data-cfg="contact.hours"></span>' +
+            '<span style="color:var(--text-invert-faint);font-size:.85rem" data-cfg="contact.hours"></span>' +
           '</address>' +
         '</div>' +
 

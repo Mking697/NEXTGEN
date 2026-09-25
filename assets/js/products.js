@@ -115,8 +115,10 @@
           return "<li>" + esc(x) + "</li>";
         }).join("") + "</ul>" : "") +
         '<div class="s-foot">' +
+          '<a class="btn btn-wa btn-sm" href="' +
+            w.NGA_waLink("Hi, I would like a quote for " + sv.name + ".") +
+            '" target="_blank" rel="noopener">Get a quote</a>' +
           '<a class="btn btn-ghost btn-sm" href="service.html?slug=' + encodeURIComponent(sv.slug) + '">What&#8217;s included</a>' +
-          '<a class="btn btn-primary btn-sm" href="contact.html?product=' + encodeURIComponent(sv.slug) + '">Get a Quote</a>' +
         "</div>" +
       "</article>";
   }
