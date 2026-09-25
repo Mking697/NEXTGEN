@@ -19,7 +19,7 @@ export function SettingsEditor({ settings }: { settings: SiteSettings }) {
       <FormSection title="Brand">
         <div className="grid gap-4 sm:grid-cols-2">
           <TextField label="Company name" name="brand_name" defaultValue={s.brand.name} required />
-          <TextField label="Website URL" name="brand_url" defaultValue={s.brand.url} placeholder="https://essorautomations.in" />
+          <TextField label="Website URL" name="brand_url" defaultValue={s.brand.url} placeholder="https://essorautomations.com" />
         </div>
         <TextField label="Tagline" name="brand_tagline" defaultValue={s.brand.tagline} />
       </FormSection>

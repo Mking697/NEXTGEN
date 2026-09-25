@@ -27,7 +27,7 @@ export function LoginForm({ disabled }: { disabled?: boolean }) {
 
       <div className="mb-4">
         <Label htmlFor="email" className="mb-1.5">Email</Label>
-        <Input id="email" name="email" type="email" autoComplete="username" required disabled={disabled} placeholder="you@essorautomations.in" />
+        <Input id="email" name="email" type="email" autoComplete="username" required disabled={disabled} placeholder="you@essorautomations.com" />
       </div>
       <div className="mb-5">
         <Label htmlFor="password" className="mb-1.5">Password</Label>

@@ -11,7 +11,7 @@
  * falls through to the next candidate instead of throwing: a slightly wrong
  * canonical URL is a bad deploy, but a thrown one is no deploy at all.
  */
-const FALLBACK = "https://essorautomations.in";
+const FALLBACK = "https://essorautomations.com";
 
 export function siteUrl(brandUrl?: string): string {
   for (const candidate of [process.env.NEXT_PUBLIC_SITE_URL, brandUrl, FALLBACK]) {

@@ -9,7 +9,7 @@ export const defaultSettings: SiteSettings = {
   brand: {
     name: "Essor Automations",
     tagline: "Business Automation, Built & Delivered",
-    url: "https://essorautomations.in",
+    url: "https://essorautomations.com",
   },
   contact: {
     phone: "+91 93114 32603",

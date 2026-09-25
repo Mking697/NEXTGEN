@@ -1,6 +1,6 @@
 # Essor Automations
 
-Marketing site and admin panel for Essor Automations — `essorautomations.in`.
+Marketing site and admin panel for Essor Automations — `essorautomations.com`.
 
 Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v4 · shadcn/ui · Supabase · Vercel.
 
@@ -42,7 +42,7 @@ The admin needs this before it can store anything.
    ```
    NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
-   NEXT_PUBLIC_SITE_URL=https://essorautomations.in
+   NEXT_PUBLIC_SITE_URL=https://essorautomations.com
    ```
 
 The anon key is meant to be public; it ships in the browser on every Supabase
@@ -68,7 +68,7 @@ bypasses RLS completely and nothing here needs it.
 2. Vercel → **Add New → Project** → import the repo. The framework is detected;
    no build settings need changing.
 3. Add the environment variables above (all three environments).
-4. **Settings → Domains** → add `essorautomations.in`, then point the domain's
+4. **Settings → Domains** → add `essorautomations.com`, then point the domain's
    nameservers or A/CNAME records at Vercel as it instructs.
 
 Every push to `main` deploys automatically. Pull requests get preview URLs.
