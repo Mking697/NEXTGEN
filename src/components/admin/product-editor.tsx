@@ -6,6 +6,7 @@ import { saveProduct } from "@/app/actions/admin";
 import {
   AreaField, ColorField, FormSection, ItemForm, SelectField, TextField, ToggleField,
 } from "@/components/admin/item-form";
+import { ImageField } from "@/components/admin/image-field";
 
 export function ProductEditor({ product }: { product?: Product }) {
   const router = useRouter();
@@ -63,6 +64,8 @@ export function ProductEditor({ product }: { product?: Product }) {
       </FormSection>
 
       <FormSection title="Appearance">
+        <ImageField folder="products" defaultValue={p?.image_url}
+          hint="A real screen from the product, not a stock photo. This is the strongest proof you have that the software exists. Wide shots read best — around 1600x1000. PNG, JPG, WebP or AVIF, up to 5 MB." />
         <div className="grid gap-4 sm:grid-cols-3">
           <TextField label="Logo text" name="logo_text" defaultValue={p?.logo_text} placeholder="CX"
             hint="Two letters." />

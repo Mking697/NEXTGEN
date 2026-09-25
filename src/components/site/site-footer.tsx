@@ -24,8 +24,10 @@ export function SiteFooter({
       <div className="mx-auto max-w-[1200px] px-5">
         <div className="mb-11 grid gap-9 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1.15fr_1fr_1.2fr]">
           <div className="lg:col-auto md:col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-block rounded-[10px] bg-white px-2.5 py-1.5">
-              <Image src="/brand/logo-wide.png" alt="Essor Automations" width={420} height={140} className="h-9 w-auto" />
+            {/* The inverted mark, so the logo sits on the slab itself. It used
+                to need a white chip behind it here, which read as a patch. */}
+            <Link href="/" className="inline-block">
+              <Image src="/brand/logo-wide-invert.png" alt="Essor Automations" width={420} height={140} className="h-9 w-auto" />
             </Link>
             <p className="mt-4 max-w-[34ch] text-[0.92rem]">
               Business software built, deployed and maintained in-house — plus the marketing team that fills it with customers.

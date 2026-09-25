@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
@@ -28,6 +29,17 @@ export function ProductCard({ p, whatsapp }: { p: Product; whatsapp: string }) {
         className="absolute inset-x-0 top-0 h-[3px]"
         style={{ background: `linear-gradient(135deg, ${p.color_from ?? "#C60000"}, ${p.color_to ?? "#A30000"})` }}
       />
+      {/* object-top, not object-center: a UI screenshot carries its meaning in
+          the top bar and first rows, and centring crops exactly that away. */}
+      {p.image_url && (
+        <div className="relative aspect-[16/10] w-full overflow-hidden border-b bg-muted">
+          <Image
+            src={p.image_url} alt={`${p.name} screenshot`} fill
+            sizes="(max-width:768px) 100vw, 420px"
+            className="object-cover object-top"
+          />
+        </div>
+      )}
       <div className="flex items-start gap-4 p-6 pb-0">
         <div className="grid size-14 shrink-0 place-items-center rounded-2xl bg-ink text-[1.2rem] font-black text-ink-foreground">
           {p.logo_text ?? p.name.slice(0, 2).toUpperCase()}

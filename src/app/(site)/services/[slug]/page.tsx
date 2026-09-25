@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Check, Target, BarChart3, MessageCircle, Zap, SlidersHorizontal, RefreshCw, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -98,6 +99,18 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </div>
           </div>
         </div>
+
+        {s.image_url && (
+          <figure className="mt-12">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[22px] border bg-muted shadow-lg">
+              <Image
+                src={s.image_url} alt={`${s.name} — a real screen from the service`} fill
+                sizes="(max-width:1024px) 100vw, 1100px" priority
+                className="object-cover object-top"
+              />
+            </div>
+          </figure>
+        )}
       </Section>
 
       {related.length > 0 && (

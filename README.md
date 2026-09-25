@@ -35,8 +35,12 @@ The admin needs this before it can store anything.
    themselves an account on your project.
 5. **SQL Editor** → run `supabase-admin-lockdown.sql`, with the UID from step 3
    in its `insert into public.admins` line. Do not skip this — see below.
-6. **Settings → API** → copy the **Project URL** and the **anon** key.
-7. Put them in `.env.local` for local work, and in
+6. **SQL Editor** → run `supabase-storage.sql`. This creates the `media`
+   bucket the admin uploads screenshots into: public to read, writable only by
+   the same admin allow-list. It calls `is_admin()`, so it must run after
+   step 5.
+7. **Settings → API** → copy the **Project URL** and the **anon** key.
+8. Put them in `.env.local` for local work, and in
    **Vercel → Settings → Environment Variables** for production:
 
    ```
@@ -119,6 +123,16 @@ trust the site does have comes from five products live at real domains that a
 visitor can open and check in one tap, which is why the hero proof card and the
 product cards lead with the domain. If you add testimonials later, use real ones
 — fabricated reviews are a Meta Ads policy violation as well as a lie.
+
+**Screenshots are the proof, so they are worth the upload path.** Products and
+services each take one image, uploaded from the admin straight to Supabase
+Storage and stored as a public URL. It is a real upload rather than a URL field
+because "host it somewhere and paste a link" is not a thing the person running
+this site should have to do. `next.config.ts` pins the allowed image host to
+the project's own Supabase hostname rather than `**.supabase.co`, so nobody can
+point an `image_url` at their own project and use this site's optimiser. The
+cards and detail pages crop with `object-top`: a UI screenshot carries its
+meaning in the top bar and the first rows, and centring crops away exactly that.
 
 **Tracking is off until an ID is entered.** The Meta Pixel, GA4 and Google Ads
 tags are driven from Settings, not from environment variables, so an ID can be

@@ -6,6 +6,7 @@ import { saveService } from "@/app/actions/admin";
 import {
   AreaField, ColorField, FormSection, ItemForm, SelectField, TextField, ToggleField,
 } from "@/components/admin/item-form";
+import { ImageField } from "@/components/admin/image-field";
 
 const ICONS = [
   { value: "target", label: "Target — paid advertising" },
@@ -65,6 +66,8 @@ export function ServiceEditor({ service }: { service?: Service }) {
       </FormSection>
 
       <FormSection title="Appearance">
+        <ImageField folder="services" defaultValue={s?.image_url}
+          hint="A real screen from the service, not a stock photo. This is the strongest proof you have that the software exists. Wide shots read best — around 1600x1000. PNG, JPG, WebP or AVIF, up to 5 MB." />
         <div className="grid gap-4 sm:grid-cols-2">
           <ColorField label="Stripe colour 1" name="color_from" defaultValue={s?.color_from} />
           <ColorField label="Stripe colour 2" name="color_to" defaultValue={s?.color_to} />

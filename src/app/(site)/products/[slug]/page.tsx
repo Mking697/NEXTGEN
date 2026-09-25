@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -115,6 +116,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </div>
           </div>
         </div>
+
+        {p.image_url && (
+          <figure className="mt-12">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[22px] border bg-muted shadow-lg">
+              <Image
+                src={p.image_url} alt={`${p.name} — a real screen from the product`} fill
+                sizes="(max-width:1024px) 100vw, 1100px" priority
+                className="object-cover object-top"
+              />
+            </div>
+          </figure>
+        )}
       </Section>
 
       {related.length > 0 && (

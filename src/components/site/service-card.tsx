@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Target, BarChart3, MessageCircle, Zap, SlidersHorizontal, RefreshCw, Wrench,
 } from "lucide-react";
@@ -21,6 +22,15 @@ export function ServiceCard({ s, whatsapp }: { s: Service; whatsapp: string }) {
         className="absolute inset-x-0 top-0 h-[3px]"
         style={{ background: `linear-gradient(135deg, ${s.color_from ?? "#C60000"}, ${s.color_to ?? "#A30000"})` }}
       />
+      {s.image_url && (
+        <div className="relative -mx-7 -mt-8 mb-6 aspect-[16/10] overflow-hidden border-b bg-muted">
+          <Image
+            src={s.image_url} alt={`${s.name}`} fill
+            sizes="(max-width:768px) 100vw, 420px"
+            className="object-cover object-top"
+          />
+        </div>
+      )}
       <div className="mb-4 flex items-center gap-4">
         {/* The one place a soft red tint is allowed on a 52px surface:
             services are second-tier conversion, so it reads as
