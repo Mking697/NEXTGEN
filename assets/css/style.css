@@ -619,3 +619,183 @@ main:focus{outline:none}
   color:var(--text-faint);border-left:1px solid var(--line-strong);
   padding-left:11px;margin-left:2px;
 }
+
+/* ============================================================
+   30. SCROLL EXPERIENCE
+   Native CSS scroll-driven animations where the browser has them
+   (Chrome/Edge 115+, Safari 26+), with the existing IntersectionObserver
+   reveal as the fallback. Everything here is decorative, so it degrades
+   to "no animation" rather than "no content".
+   ============================================================ */
+
+/* ---- 30a. Scroll progress bar ---- */
+.scroll-progress{
+  position:fixed;top:0;left:0;height:3px;width:100%;z-index:90;
+  background:var(--grad);transform-origin:0 50%;transform:scaleX(0);
+  pointer-events:none;
+}
+@supports (animation-timeline:scroll()){
+  .scroll-progress{
+    animation:progress-grow linear;
+    animation-timeline:scroll(root block);
+  }
+}
+@keyframes progress-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ---- 30b. Scroll-linked reveal ----
+   The JS version toggles a class at a threshold; this ties opacity and
+   travel to actual scroll position, which reads far smoother. */
+@supports (animation-timeline:view()){
+  .js-reveal [data-reveal]{
+    opacity:1;transform:none;                 /* hand control to the timeline */
+    animation:reveal-in linear both;
+    animation-timeline:view();
+    animation-range:entry 0% entry 62%;
+  }
+}
+@keyframes reveal-in{
+  from{opacity:0;transform:translateY(26px)}
+  to{opacity:1;transform:none}
+}
+
+/* ---- 30c. Brand video moment ---- */
+/* The source video is a logo build on a PURE WHITE background, so it sits on
+   a light section and uses multiply blending — white goes transparent and the
+   mark appears to draw itself straight onto the page, with no video box. */
+.brand-moment{
+  position:relative;padding:0;background:var(--bg);color:var(--text);
+  overflow:clip;
+}
+.brand-stage{
+  min-height:180vh;                            /* the scroll distance the pin uses */
+  position:relative;
+}
+.brand-pin{
+  position:sticky;top:0;height:100vh;
+  display:grid;place-items:center;text-align:center;
+  padding:0 22px;
+}
+.brand-video-wrap{
+  position:relative;width:min(58vmin,420px);aspect-ratio:1;
+  display:grid;place-items:center;
+}
+.brand-video{
+  width:100%;height:100%;object-fit:contain;
+  mix-blend-mode:multiply;background:transparent;
+}
+/* A faint red bloom so the mark has some depth on flat white */
+.brand-video-wrap::before{
+  content:"";position:absolute;inset:-14%;border-radius:50%;
+  background:radial-gradient(circle,rgba(248,0,0,.09),transparent 70%);
+  z-index:-1;
+}
+.brand-copy{max-width:640px;margin:28px auto 0}
+.brand-copy h2{color:var(--text);font-size:clamp(1.5rem,3.4vw,2.3rem);margin-bottom:.35em}
+.brand-copy p{color:var(--text-dim);font-size:var(--fs-lead);margin:0}
+
+@supports (animation-timeline:view()){
+  .brand-video-wrap{
+    animation:brand-zoom linear both;
+    animation-timeline:view();
+    animation-range:entry 10% cover 55%;
+  }
+  .brand-copy{
+    animation:brand-copy-in linear both;
+    animation-timeline:view();
+    animation-range:cover 18% cover 42%;
+  }
+}
+@keyframes brand-zoom{
+  from{transform:scale(.72);opacity:.25}
+  to{transform:scale(1);opacity:1}
+}
+@keyframes brand-copy-in{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:none}
+}
+@media(max-width:720px){
+  .brand-stage{min-height:150vh}
+  .brand-video-wrap{width:min(66vmin,320px)}
+}
+
+/* ---- 30d. Sticky process rail ---- */
+.rail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:56px;align-items:start}
+@media(max-width:900px){.rail{grid-template-columns:1fr;gap:28px}}
+.rail-sticky{position:sticky;top:calc(var(--nav-h) + 40px)}
+.rail-steps{display:grid;gap:18px;position:relative;padding-left:46px}
+/* the track the progress line runs down */
+.rail-steps::before{
+  content:"";position:absolute;left:17px;top:12px;bottom:12px;width:2px;
+  background:var(--line);border-radius:2px;
+}
+.rail-steps::after{
+  content:"";position:absolute;left:17px;top:12px;width:2px;height:0;
+  background:var(--grad);border-radius:2px;
+}
+@supports (animation-timeline:view()){
+  .rail-steps::after{
+    animation:rail-fill linear both;
+    animation-timeline:view();
+    animation-range:entry 40% cover 70%;
+  }
+}
+@keyframes rail-fill{from{height:0}to{height:calc(100% - 24px)}}
+
+.rail-step{
+  position:relative;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:22px 24px;box-shadow:var(--shadow-xs);
+  transition:border-color .3s var(--ease),box-shadow .3s var(--ease);
+}
+.rail-step::before{
+  counter-increment:rs;content:counter(rs);
+  position:absolute;left:-46px;top:20px;width:36px;height:36px;border-radius:50%;
+  display:grid;place-items:center;font-weight:800;font-size:.9rem;line-height:1;
+  background:var(--surface);border:2px solid var(--line-strong);color:var(--text-faint);
+  transition:.3s var(--ease);
+}
+.rail-step.in-view{border-color:var(--line-strong);box-shadow:var(--shadow)}
+.rail-step.in-view::before{background:var(--brand);border-color:var(--brand);color:#fff}
+.rail-step h3{margin:0 0 .35em;font-size:1.1rem}
+.rail-step p{margin:0;color:var(--text-dim);font-size:var(--fs-sm)}
+.rail-steps{counter-reset:rs}
+
+/* ---- 30e. Parallax drift (scroll-linked, decorative only) ---- */
+@supports (animation-timeline:view()){
+  [data-drift]{
+    animation:drift linear both;
+    animation-timeline:view();
+    animation-range:entry 0% exit 100%;
+  }
+}
+@keyframes drift{from{transform:translateY(24px)}to{transform:translateY(-24px)}}
+
+/* ---- 30f. Hero swoosh, echoing the logo's arc ---- */
+.hero-swoosh{
+  position:absolute;right:-6%;top:12%;width:52%;max-width:640px;
+  opacity:.10;pointer-events:none;z-index:0;
+}
+.hero-grid{position:relative;z-index:1}
+@media(max-width:980px){.hero-swoosh{display:none}}
+
+/* ---- 30g. Live-domain ticker ---- */
+.ticker{overflow:hidden;padding:18px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.ticker-track{display:flex;gap:44px;width:max-content;animation:tick 30s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(-50%)}}
+.ticker-item{display:flex;align-items:center;gap:10px;white-space:nowrap;
+  font-weight:700;font-size:.95rem;color:var(--text-dim)}
+.ticker-item .dot{width:8px;height:8px}
+
+/* Everything in section 30 is decoration — none of it survives a
+   reduced-motion preference. */
+@media(prefers-reduced-motion:reduce){
+  .scroll-progress,.brand-video-wrap,.brand-copy,.rail-steps::after,[data-drift]{animation:none!important}
+  .rail-steps::after{height:calc(100% - 24px)}
+  .ticker-track{animation:none}
+  .brand-stage{min-height:auto}
+  .brand-pin{position:static;height:auto;padding:var(--s-6) 22px}
+  .brand-video-wrap{transform:none;opacity:1}
+  .brand-copy{opacity:1;transform:none}
+}

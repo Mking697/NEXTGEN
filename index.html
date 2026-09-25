@@ -49,6 +49,14 @@
 
 <!-- ================= HERO ================= -->
 <section class="hero">
+  <svg class="hero-swoosh" viewBox="0 0 600 260" fill="none" aria-hidden="true" focusable="false">
+    <path d="M8 196C120 250 300 238 404 170 468 128 498 76 512 30"
+          stroke="url(#sw)" stroke-width="26" stroke-linecap="round"/>
+    <path d="M470 18 L524 12 L518 66 Z" fill="#E70000"/>
+    <defs><linearGradient id="sw" x1="0" y1="200" x2="520" y2="20" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F80000"/><stop offset="1" stop-color="#A30000"/>
+    </linearGradient></defs>
+  </svg>
   <div class="wrap hero-grid">
     <div>
       <span class="pill"><b>5 LIVE</b> <span class="dot live"></span> 7 products built in-house</span>
@@ -113,6 +121,46 @@
     </div>
   </div>
 </section>
+
+<!-- ================= BRAND MOMENT (logo animation) ================= -->
+<section class="brand-moment" aria-labelledby="brand-h">
+  <div class="brand-stage">
+    <div class="brand-pin">
+      <div>
+        <div class="brand-video-wrap">
+          <video class="brand-video" data-inview-play muted loop playsinline preload="none"
+                 poster="assets/video/logo-anim-poster.v1.jpg"
+                 aria-label="The Essor Automations logo assembling">
+            <source src="assets/video/logo-anim.v1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="brand-copy">
+          <h2 id="brand-h">Built by one team, start to finish</h2>
+          <p>
+            We write the code, run the servers, and answer the phone. No reselling,
+            no white-labelling, no handing you to someone else when it breaks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LIVE TICKER ================= -->
+<div class="ticker section--alt" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="dot"></span>chatxflow.online</span>
+    <span class="ticker-item"><span class="dot"></span>dawaistore.online</span>
+    <span class="ticker-item"><span class="dot"></span>panelsuite.online</span>
+    <span class="ticker-item"><span class="dot"></span>autolyst.online</span>
+    <span class="ticker-item"><span class="dot"></span>admetics.online</span>
+    <span class="ticker-item"><span class="dot"></span>chatxflow.online</span>
+    <span class="ticker-item"><span class="dot"></span>dawaistore.online</span>
+    <span class="ticker-item"><span class="dot"></span>panelsuite.online</span>
+    <span class="ticker-item"><span class="dot"></span>autolyst.online</span>
+    <span class="ticker-item"><span class="dot"></span>admetics.online</span>
+  </div>
+</div>
 
 <!-- ================= WHO IT IS FOR ================= -->
 <section class="section section--tight section--alt">
@@ -244,23 +292,37 @@
 <!-- ================= HOW IT WORKS ================= -->
 <section class="section section--alt" id="how">
   <div class="wrap">
-    <div class="section-head center" data-reveal>
-      <span class="eyebrow">How It Works</span>
-      <h2>From first call to live, in three steps</h2>
-    </div>
+    <div class="rail">
+      <div class="rail-sticky">
+        <span class="eyebrow">How It Works</span>
+        <h2 style="margin-bottom:.5em">From first call to live, in four steps</h2>
+        <p class="lead">
+          No long discovery phase, no surprise invoice. You will know the timeline
+          and the number before anything starts.
+        </p>
+        <div class="btn-row" style="margin-top:var(--s-3)">
+          <a class="btn btn-wa" data-cfg-href="whatsapp" href="#" target="_blank" rel="noopener"
+             data-wa-msg="Hi, I would like to start with a 15-minute call.">Start on WhatsApp</a>
+        </div>
+      </div>
 
-    <div class="steps">
-      <div class="step" data-reveal>
-        <h3>Talk to us</h3>
-        <p>A 15-minute call. You describe how things work today. We tell you which product or service fits &mdash; and if none of them do, we say that instead of selling you something.</p>
-      </div>
-      <div class="step" data-reveal="90">
-        <h3>Setup &amp; training</h3>
-        <p>We create your account, import your existing data, configure everything around your process, and train your team until they are comfortable.</p>
-      </div>
-      <div class="step" data-reveal="180">
-        <h3>Live &amp; supported</h3>
-        <p>You go live, and we stay. Updates, changes, and quick support when something needs attention.</p>
+      <div class="rail-steps">
+        <div class="rail-step">
+          <h3>Talk to us</h3>
+          <p>A 15-minute call. You describe how things work today. We tell you which product or service fits &mdash; and if none of them do, we say that instead of selling you something.</p>
+        </div>
+        <div class="rail-step">
+          <h3>Fixed quote</h3>
+          <p>You get the scope, the timeline and the price in writing. It does not move unless you ask for something new.</p>
+        </div>
+        <div class="rail-step">
+          <h3>Setup &amp; training</h3>
+          <p>We create your account, import your existing data, configure everything around your process, and train your team until they are comfortable.</p>
+        </div>
+        <div class="rail-step">
+          <h3>Live &amp; supported</h3>
+          <p>You go live, and we stay. Updates, changes, and quick support on WhatsApp when something needs attention.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -447,5 +509,6 @@
 <script src="assets/js/layout.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/products.js"></script>
+<script src="assets/js/scroll.js"></script>
 </body>
 </html>
