@@ -1,178 +1,141 @@
-# Essor Automations — Website
+# Essor Automations
 
-Static marketing site for Essor Automations. Plain HTML, CSS and vanilla JavaScript — **no build step**, no framework. Upload the folder to Hostinger and it runs.
+Marketing site and admin panel for Essor Automations — `essorautomations.in`.
 
-It sells two things:
-
-- **Products** — 7 in-house SaaS products (5 live in production)
-- **Services** — 7 agency services (Meta Ads, Google Ads, WhatsApp automation, landing pages, creative, SEO, custom development)
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v4 · shadcn/ui · Supabase · Vercel.
 
 ---
 
-## 🚨 Before you run a single ad
-
-The site is built, but it is **not launch-ready** until you fill in `assets/js/config.js`. Open any page with the browser console open and it will list exactly what is missing.
-
-| # | What | Why it blocks launch |
-|---|------|----------------------|
-| 1 | `contact.whatsapp` + `contact.phone` | Still placeholders. Every form submission and WhatsApp button currently goes to a number that does not exist — **the lead is silently lost while the visitor is told it worked.** |
-| 2 | `tracking.metaPixelId` | Empty, so no `PageView` and no `Lead` events fire. Meta cannot optimise, retarget, or build a lookalike. You would be buying cold traffic blind. |
-| 3 | `supabase.url` + `supabase.anonKey` | Without these, leads are not stored anywhere. |
-| 4 | Legal pages | `privacy.html`, `terms.html`, `refund.html` are templates. Add your registered company name, address and GSTIN. |
-| 5 | Domain | Replace `essorautomations.in` in `sitemap.xml` and in each page's `<link rel="canonical">` and `og:` tags. |
-
-Fix 1 and 2 first. Nothing else matters until a submitted form produces a lead you can actually retrieve.
-
----
-
-## Project structure
-
-```
-NEXTGEN/
-├── index.html              Homepage (products + services + FAQ + lead form)
-├── products.html           All products, filterable
-├── product.html            Product detail   (?slug=chatxflow)
-├── services.html           All services, filterable
-├── service.html            Service detail   (?slug=meta-ads-management)
-├── about.html  contact.html  thank-you.html  404.html
-├── privacy.html  terms.html  refund.html
-│
-├── admin/
-│   ├── index.html          Login
-│   └── dashboard.html      Products, Services, Leads, Settings, Backup
-│
-├── assets/
-│   ├── css/style.css       Design system (tokens at the top)
-│   ├── css/admin.css       Admin panel only
-│   └── js/
-│       ├── config.js       ← THE ONLY FILE YOU NORMALLY EDIT
-│       ├── store.js        Data layer (Supabase ↔ JSON)
-│       ├── layout.js       Shared nav + footer, injected at runtime
-│       ├── icons.js        Inline SVG icon set
-│       ├── main.js         Nav, forms, tracking, animations
-│       ├── products.js     Renders products AND services
-│       └── admin.js        Admin panel logic
-│
-├── data/                   Fallback content when Supabase is not set up
-│   ├── products.json  services.json  site.json
-│
-├── supabase-schema.sql     Run once in the Supabase SQL editor
-├── sitemap.xml  robots.txt  .htaccess
-```
-
----
-
-## How the data layer works
-
-`store.js` exposes one API over two backends:
-
-- **Supabase configured** → live reads, and the admin panel writes straight to the database. Changes appear on the site immediately.
-- **Not configured** → the site reads `data/*.json` and stays fully functional. The admin panel works in demo mode (changes saved to that browser only) and you publish by downloading JSON and uploading it.
-
-Both `products` and `services` use the same generic functions, so anything that works for one works for the other.
-
----
-
-## Going live on Hostinger
-
-### Option A — with Supabase (recommended)
-
-The admin panel becomes genuinely live: add a product, and it appears on the site instantly.
-
-1. Create a project at [supabase.com](https://supabase.com) (free tier is enough).
-2. SQL Editor → New query → paste **all** of `supabase-schema.sql` → **Run**.
-3. Settings → API → copy the **Project URL** and **anon key** into `assets/js/config.js`.
-4. Authentication → Users → **Add user** → your admin email and password (keep *Auto Confirm* on).
-5. Upload the whole folder to `public_html/` via hPanel → File Manager.
-
-The anon key is safe to ship publicly — Row Level Security in the schema means visitors can only read published rows and insert leads, never read other people's leads.
-
-### Option B — JSON only
-
-No database. Products and services come from `data/*.json`.
-
-1. Upload the folder to `public_html/`.
-2. Edit content in the admin panel (demo mode).
-3. **Backup / Export** → download `products.json` / `services.json`.
-4. Replace the old files in `public_html/data/` via File Manager.
-
-Leads will not be stored — they go to WhatsApp instead (`leadFallback.mode` in config).
-
----
-
-## Admin panel
-
-Visit `/admin/` on your domain.
-
-- **Supabase configured** → log in with the email and password you created in step 4.
-- **Not configured** → demo passcode from `config.admin.demoPasscode` (default `nga@2026` — change it).
-
-The panel is `noindex, nofollow`. For real protection, add password protection to the `/admin` folder in hPanel → **Directory Privacy**. The demo passcode is client-side and is **not** security.
-
-What you can do: add / edit / delete products and services, show or hide them, feature them on the homepage, reorder them, view and export leads as CSV, edit homepage copy, and export or import JSON backups.
-
----
-
-## Local development
+## Running it locally
 
 ```bash
-cd E:\NEXTGEN
-python -m http.server 8080
+npm install
+npm run dev          # http://localhost:3000
 ```
 
-Then open <http://localhost:8080>. Use a server rather than opening the file directly — `fetch()` on `data/*.json` will not work over `file://`.
+The site works immediately with no configuration. Until Supabase is connected it
+reads the seed content in `src/lib/defaults.ts`, so every page renders and the
+admin is browsable — it just cannot save anything, and says so.
 
 ---
 
-## Updating images
+## Connecting Supabase
 
-Hostinger's CDN caches images for 7 days and ignores `?v=` query strings, so a
-changed image will not reach visitors on its own. Asset filenames therefore
-carry a version suffix:
+The admin needs this before it can store anything.
 
-```
-assets/img/logo-wide.v1.png
-assets/img/favicon-32.v1.png
-```
+1. Create a project at [supabase.com](https://supabase.com).
+2. **SQL Editor → New query** → paste all of `supabase-schema.sql` → **Run**.
+   It creates the tables, the Row Level Security policies and the starter rows,
+   and is safe to run more than once.
+3. **Settings → API** → copy the **Project URL** and the **anon** key.
+4. Put them in `.env.local` for local work, and in
+   **Vercel → Settings → Environment Variables** for production:
 
-**To replace any image:** save it with the next suffix (`.v3.png`), update the
-references (they live in `assets/js/layout.js` and the `<head>` of each page),
-and deploy. The new filename is a new cache key, so it appears immediately.
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+   NEXT_PUBLIC_SITE_URL=https://essorautomations.in
+   ```
 
-`favicon.ico` is the one exception — browsers request it at a fixed path, so it
-cannot be versioned. It is capped at a 1-day cache in `.htaccess` instead.
+5. **Authentication → Users → Add user** — create your admin login with
+   **Auto Confirm User** switched on. That email and password is what
+   `/admin/login` accepts.
 
-## Design notes
-
-- Design tokens live at the top of `assets/css/style.css`. Change `--brand` and `--brand-2` and the whole site follows.
-- `--grad` is deliberately reserved for the primary CTA and the logo mark. Spreading it across every element makes the CTA stop reading as "click this".
-- Nav and footer are in `layout.js` only — edit them once, and every page updates.
-- Add an icon by adding one entry to the `ICONS` object in `icons.js`, then using `data-icon="name"` anywhere.
-
-### Deliberate content choices
-
-- **No testimonials.** Fabricated reviews violate Meta's advertising policies and can get an ad account banned. Add real ones when you have them — there is a marked section on the homepage.
-- **No invented metrics.** The hero shows the five real live domains a visitor can open and verify, rather than a mocked-up dashboard with made-up numbers.
-- **No fake prices.** Cards show "Pricing on request" until you set a real `price` in the admin panel.
+The anon key is meant to be public; it ships in the browser on every Supabase
+site. What actually protects the data is the RLS policies in the schema — in
+particular, `anon` can *insert* a lead but has no `select` policy at all, so the
+enquiry list cannot be read by the public.
 
 ---
 
-## Accessibility
+## Deploying to Vercel
 
-The site was audited against WCAG 2.2 AA. Implemented: skip links, visible focus rings, keyboard-operable mobile menu with Escape support, screen-reader-announced form errors, a focus-trapped admin modal, labelled controls, breadcrumb landmarks, `prefers-reduced-motion` support, and contrast verified against the composited background rather than the flat token.
+1. Push to GitHub.
+2. Vercel → **Add New → Project** → import the repo. The framework is detected;
+   no build settings need changing.
+3. Add the environment variables above (all three environments).
+4. **Settings → Domains** → add `essorautomations.in`, then point the domain's
+   nameservers or A/CNAME records at Vercel as it instructs.
 
-If you edit the CSS, keep `--text-faint` at or lighter than `#8A96B2` — anything darker fails 4.5:1 over the background glow.
+Every push to `main` deploys automatically. Pull requests get preview URLs.
 
 ---
 
-## Tracking events
+## The admin panel
 
-Once the Meta Pixel ID is set, the site fires:
+`/admin`, protected by `src/proxy.ts` — an unauthenticated request to anything
+under `/admin` is redirected to the login.
 
-| Event | When |
-|-------|------|
-| `PageView` | Every page load |
-| `Lead` | A lead form is submitted successfully |
-| `Contact` | A WhatsApp or phone link is clicked |
+| Page | What it controls |
+|---|---|
+| Dashboard | New-lead count, product and service counts, five most recent leads |
+| Products | Full CRUD: copy, features, highlights, pricing, stripe colours, visibility, order |
+| Services | Full CRUD: copy, deliverables, outcomes, icon, pricing, visibility, order |
+| Leads | Search, status (new → contacted → qualified → won/lost), CSV export, click-to-WhatsApp |
+| Settings | Contact details, social links, hero copy, trust band, audience chips, CTA band, FAQ, SEO |
 
-Build your Meta custom conversion on `Lead`.
+Saving calls `revalidatePath("/", "layout")`, so a change appears on the public
+site on the next request rather than waiting for a rebuild.
+
+---
+
+## Things worth knowing before changing them
+
+**The WhatsApp number is load-bearing.** `settings.contact.whatsapp` drives every
+green button on the site. It must be digits only with the country code and no
+`+` or spaces (`919311432603`). Wrong here means every enquiry silently goes
+nowhere.
+
+**Red is rationed deliberately.** At most one filled red element per viewport, so
+the primary call to action keeps its emphasis. That is why product and service
+cards use the green WhatsApp action, why filter chips and the nav CTA are
+neutral or green, and why each item's own colour is a 3px stripe rather than a
+56px tile — a grid of saturated tiles on white reads as a rainbow.
+
+**Colour values are contrast-checked, not chosen by eye.** `#C60000` is 6.17:1 on
+white for fills and red text; `#A30000` is 8.21:1 for links and focus; `#F80000`
+is 4.21:1 and is legal *only* as a graphic, never as text. Muted text is
+`#616A78` rather than the usual `#6B7280`, which passes on white but drops to
+4.35:1 on the alternating band where those labels actually sit. The dark footer
+and CTA slabs use the separate `--ink-*` tokens, because `--muted-foreground` is
+3.52:1 against them and fails.
+
+**No testimonials and no prices, on purpose.** Neither has been invented. The
+trust the site does have comes from five products live at real domains that a
+visitor can open and check in one tap, which is why the hero proof card and the
+product cards lead with the domain. If you add testimonials later, use real ones
+— fabricated reviews are a Meta Ads policy violation as well as a lie.
+
+**The trust band takes three numbers, not four.** Each is checkable. A padded
+fourth costs more trust with this audience than the symmetry is worth.
+
+---
+
+## Layout
+
+```
+src/
+├─ app/
+│  ├─ (site)/          public pages, share a layout with header/footer
+│  ├─ admin/           admin panel, guarded by proxy.ts
+│  ├─ actions/         server actions: lead.ts (public), admin.ts (authenticated)
+│  ├─ sitemap.ts       generated from live products and services
+│  └─ robots.ts
+├─ components/
+│  ├─ site/            hero, cards, brand moment, forms
+│  ├─ admin/           editors, tables, nav
+│  └─ ui/              shadcn primitives
+├─ lib/
+│  ├─ data.ts          read layer — Supabase with a seed-content fallback
+│  ├─ defaults.ts      the seed content
+│  ├─ types.ts
+│  └─ supabase/        browser, server and proxy clients
+└─ proxy.ts            auth guard
+
+legacy-static/         the previous hand-built static site, kept for reference
+```
+
+## Credits
+
+The hero mesh-gradient shader was adapted from a
+[21st.dev](https://21st.dev) component by `zerotherm27-create`.
