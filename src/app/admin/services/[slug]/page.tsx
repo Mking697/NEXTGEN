@@ -10,7 +10,7 @@ import { getService } from "@/lib/data";
 
 export default async function EditServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const service = await getService(slug);
+  const service = await getService(slug, { includeHidden: true });
   if (!service) notFound();
 
   return (

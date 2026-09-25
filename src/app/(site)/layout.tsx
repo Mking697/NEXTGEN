@@ -2,7 +2,13 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { WhatsAppFab } from "@/components/site/whatsapp-fab";
 import { Tracking } from "@/components/site/tracking";
+import { OrganizationLd } from "@/components/site/structured-data";
 import { getProducts, getServices, getSettings, waLink } from "@/lib/data";
+
+// Prerender the public site and refresh it every five minutes. Admin saves
+// call revalidatePath("/", "layout"), so an edit still appears at once —
+// this only bounds how stale a page can get if that ever fails to run.
+export const revalidate = 300;
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const [settings, products, services] = await Promise.all([
@@ -26,6 +32,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <SiteFooter settings={settings} products={products} services={services} />
       <WhatsAppFab href={wa} />
       <Tracking {...settings.tracking} />
+      <OrganizationLd settings={settings} />
     </>
   );
 }

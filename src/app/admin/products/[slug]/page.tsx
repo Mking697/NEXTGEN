@@ -10,7 +10,7 @@ import { getProduct } from "@/lib/data";
 
 export default async function EditProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = await getProduct(slug);
+  const product = await getProduct(slug, { includeHidden: true });
   if (!product) notFound();
 
   return (

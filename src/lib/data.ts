@@ -1,5 +1,6 @@
 import "server-only";
 import { createClient, supabaseConfigured } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { defaultProducts, defaultServices, defaultSettings } from "@/lib/defaults";
 import type { Lead, Product, Service, SiteSettings } from "@/lib/types";
 
@@ -10,7 +11,15 @@ import type { Lead, Product, Service, SiteSettings } from "@/lib/types";
  * is not configured, or when a query fails. That is deliberate: a marketing
  * site that 500s because a database is down is worse than one showing
  * slightly stale copy, and it lets the whole site run before Supabase exists.
+ *
+ * Reads split by audience, not by convenience: anything a visitor may see goes
+ * through the cookie-free public client so the page stays prerenderable, and
+ * only `includeHidden` reads and the lead list use the cookie-based client,
+ * which needs the admin's session and makes the route dynamic.
  */
+
+const readClient = async (includeHidden?: boolean) =>
+  includeHidden ? await createClient() : createPublicClient();
 
 function sortItems<T extends { sort_order?: number | null; name: string }>(rows: T[]) {
   return [...rows].sort(
@@ -25,7 +34,7 @@ export async function getProducts(opts?: { includeHidden?: boolean }): Promise<P
   if (!supabaseConfigured) return seed;
 
   try {
-    const supabase = await createClient();
+    const supabase = await readClient(opts?.includeHidden);
     let q = supabase.from("products").select("*").order("sort_order", { ascending: true });
     if (!opts?.includeHidden) q = q.eq("published", true);
     const { data, error } = await q;
@@ -36,8 +45,10 @@ export async function getProducts(opts?: { includeHidden?: boolean }): Promise<P
   }
 }
 
-export async function getProduct(slug: string): Promise<Product | null> {
-  const all = await getProducts({ includeHidden: true });
+export async function getProduct(
+  slug: string, opts?: { includeHidden?: boolean },
+): Promise<Product | null> {
+  const all = await getProducts(opts);
   return all.find((p) => p.slug === slug) ?? null;
 }
 
@@ -48,7 +59,7 @@ export async function getServices(opts?: { includeHidden?: boolean }): Promise<S
   if (!supabaseConfigured) return seed;
 
   try {
-    const supabase = await createClient();
+    const supabase = await readClient(opts?.includeHidden);
     let q = supabase.from("services").select("*").order("sort_order", { ascending: true });
     if (!opts?.includeHidden) q = q.eq("published", true);
     const { data, error } = await q;
@@ -59,16 +70,18 @@ export async function getServices(opts?: { includeHidden?: boolean }): Promise<S
   }
 }
 
-export async function getService(slug: string): Promise<Service | null> {
-  const all = await getServices({ includeHidden: true });
-  return all.find((s) => s.slug === slug) ?? null;
+export async function getService(
+  slug: string, opts?: { includeHidden?: boolean },
+): Promise<Service | null> {
+  const all = await getServices(opts);
+  return all.find((x) => x.slug === slug) ?? null;
 }
 
 /** Stored as a single JSON row so the admin can edit copy without migrations. */
 export async function getSettings(): Promise<SiteSettings> {
   if (!supabaseConfigured) return defaultSettings;
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("settings").select("data").eq("id", 1).maybeSingle();
     if (error || !data?.data) return defaultSettings;

@@ -11,7 +11,7 @@ import { getService, getServices, getSettings, waLink } from "@/lib/data";
 const ICONS = { target: Target, chart: BarChart3, chat: MessageCircle, zap: Zap, sliders: SlidersHorizontal, refresh: RefreshCw, tool: Wrench } as const;
 
 export async function generateStaticParams() {
-  const services = await getServices({ includeHidden: true });
+  const services = await getServices();
   return services.map((s) => ({ slug: s.slug }));
 }
 

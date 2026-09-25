@@ -10,7 +10,7 @@ import { Breadcrumb } from "@/components/site/breadcrumb";
 import { getProduct, getProducts, getSettings, waLink } from "@/lib/data";
 
 export async function generateStaticParams() {
-  const products = await getProducts({ includeHidden: true });
+  const products = await getProducts();
   return products.map((p) => ({ slug: p.slug }));
 }
 

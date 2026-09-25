@@ -8,6 +8,11 @@ import { AdminNavLink } from "@/components/admin/admin-nav-link";
 
 export const metadata = { title: "Admin", robots: { index: false, follow: false } };
 
+// The settings page reads through the cookie-free client, so without this it
+// could be prerendered and served stale to the next admin. Nothing under
+// /admin should ever be cached.
+export const dynamic = "force-dynamic";
+
 const NAV = [
   { href: "/admin", label: "Dashboard", Icon: LayoutGrid, exact: true },
   { href: "/admin/products", label: "Products", Icon: Package },

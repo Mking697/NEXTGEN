@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Check, Mail, MessageCircle, Phone } from "lucide-react";
 import { Section } from "@/components/site/section";
 import { Breadcrumb } from "@/components/site/breadcrumb";
 import { LeadForm } from "@/components/site/lead-form";
+import { LeadFormFromQuery } from "@/components/site/lead-form-query";
 import { getProducts, getServices, getSettings, waLink } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -12,13 +14,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-export default async function ContactPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ product?: string }>;
-}) {
-  const [{ product }, settings, products, services] = await Promise.all([
-    searchParams, getSettings(), getProducts(), getServices(),
+export default async function ContactPage() {
+  const [settings, products, services] = await Promise.all([
+    getSettings(), getProducts(), getServices(),
   ]);
   const { contact } = settings;
   const tel = `tel:${contact.phone.replace(/\s/g, "")}`;
@@ -85,7 +83,9 @@ export default async function ContactPage({
             </div>
           </div>
 
-          <LeadForm products={products} services={services} preselect={product} />
+          <Suspense fallback={<LeadForm products={products} services={services} />}>
+            <LeadFormFromQuery products={products} services={services} />
+          </Suspense>
         </div>
       </Section>
     </>

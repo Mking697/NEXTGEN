@@ -8,6 +8,7 @@ import { BrandMoment } from "@/components/site/brand-moment";
 import { Reveal } from "@/components/site/reveal";
 import { Counter } from "@/components/site/counter";
 import { LeadForm } from "@/components/site/lead-form";
+import { FaqLd } from "@/components/site/structured-data";
 import { getProducts, getServices, getSettings, waLink } from "@/lib/data";
 
 export default async function HomePage() {
@@ -319,6 +320,7 @@ export default async function HomePage() {
       </Section>
 
       {/* ============ FAQ ============ */}
+      <FaqLd faq={faq} />
       <Section id="faq" alt>
         <SectionHead eyebrow="FAQ" title="The questions everyone asks" />
         <div className="mx-auto max-w-[820px]">
