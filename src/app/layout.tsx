@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { getSettings } from "@/lib/data";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -13,7 +14,7 @@ const jakarta = Plus_Jakarta_Sans({
 
 export async function generateMetadata(): Promise<Metadata> {
   const s = await getSettings();
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? s.brand.url;
+  const base = siteUrl(s.brand.url);
 
   return {
     metadataBase: new URL(base),

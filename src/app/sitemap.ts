@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
+import { siteUrl } from "@/lib/site-url";
 import { getProducts, getServices, getSettings } from "@/lib/data";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [settings, products, services] = await Promise.all([
     getSettings(), getProducts(), getServices(),
   ]);
-  const base = (process.env.NEXT_PUBLIC_SITE_URL ?? settings.brand.url).replace(/\/$/, "");
+  const base = siteUrl(settings.brand.url);
   const now = new Date();
 
   const staticPages: MetadataRoute.Sitemap = [
