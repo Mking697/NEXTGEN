@@ -97,6 +97,9 @@
   --ink-foreground:#FFFFFF;
   --ink-dim:#B9C0CC;      /* 10.50:1 on --ink */
   --ink-faint:#8E97A5;    /* 6.52:1 on --ink — --muted-foreground is 3.52:1 here and FAILS */
+  --brand-on-ink:#FF3B3B; /* 5.44:1 on --ink. --brand is 3.11:1 there, which
+                             only clears large text, and --brand-bright is
+                             4.57:1 but is reserved for graphics on white. */
   --ok:#0B7A43;  --ok-tint:#E7F7EE;  --ok-line:#A7DCC0;
   --warn:#8A5200; --warn-tint:#FFF6E5; --warn-line:#E7C77A;
   --wa:#25D366;  --wa-ink:#04220F;    /* white on this green is 1.98:1 — keep dark ink */
@@ -131,6 +134,7 @@
 @theme inline {
   --color-brand: var(--brand);
   --color-brand-ink: var(--brand-ink);
+  --color-brand-on-ink: var(--brand-on-ink);
   --color-brand-bright: var(--brand-bright);
   --color-brand-tint: var(--brand-tint);
   --color-brand-line: var(--brand-line);

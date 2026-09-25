@@ -16,7 +16,7 @@ export function ServiceCard({ s, whatsapp }: { s: Service; whatsapp: string }) {
   const Icon = ICONS[(s.icon ?? "zap") as keyof typeof ICONS] ?? Zap;
 
   return (
-    <article className="relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-card p-7 pt-8 shadow-xs transition-all duration-200 hover:border-input/40 hover:shadow-md md:hover:-translate-y-[3px]">
+    <article className="relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-card p-7 pt-8 shadow-sm transition-all duration-200 hover:border-input/40 hover:shadow-lg md:hover:-translate-y-[3px]">
       <span
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-[3px]"

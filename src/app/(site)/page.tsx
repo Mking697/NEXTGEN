@@ -110,14 +110,14 @@ export default async function HomePage() {
       </section>
 
       {/* ============ TRUST BAND ============ */}
-      <Section alt tight aria-label="Company numbers">
+      <Section dark tight aria-label="Company numbers">
         <div className="grid gap-6 text-center sm:grid-cols-3">
           {trust.map((t, i) => (
             <Reveal key={t.label} delay={i * 80}>
-              <b className="block text-[clamp(1.7rem,3.4vw,2.4rem)] font-extrabold leading-tight tabular-nums text-brand">
+              <b className="block text-[clamp(1.7rem,3.4vw,2.4rem)] font-extrabold leading-tight tabular-nums text-brand-on-ink">
                 <Counter value={t.value} />
               </b>
-              <span className="mt-1.5 block text-[0.8125rem] font-semibold text-muted-foreground">{t.label}</span>
+              <span className="mt-1.5 block text-[0.8125rem] font-semibold text-ink-dim">{t.label}</span>
             </Reveal>
           ))}
         </div>
@@ -230,15 +230,15 @@ export default async function HomePage() {
       </Section>
 
       {/* ============ HOW IT WORKS — sticky rail ============ */}
-      <Section id="how" alt>
+      <Section id="how" dark>
         <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-14">
           <div className="lg:sticky lg:top-28">
-            <span className="mb-4 inline-flex items-center gap-2 text-[0.7rem] font-extrabold uppercase tracking-[0.09em] text-muted-foreground">
-              <span className="h-0.5 w-[22px] rounded-sm bg-[linear-gradient(100deg,var(--brand-bright),var(--brand-ink))]" />
+            <span className="mb-4 inline-flex items-center gap-2 text-[0.7rem] font-extrabold uppercase tracking-[0.09em] text-ink-faint">
+              <span className="h-0.5 w-[22px] rounded-sm bg-[linear-gradient(100deg,var(--brand-on-ink),var(--brand))]" />
               How It Works
             </span>
             <h2 className="mb-3 text-[clamp(1.6rem,3.4vw,2.3rem)] font-extrabold">From first call to live, in four steps</h2>
-            <p className="text-[clamp(1rem,1.3vw,1.125rem)] text-muted-foreground">
+            <p className="text-[clamp(1rem,1.3vw,1.125rem)] text-ink-dim">
               No long discovery phase, no surprise invoice. You will know the timeline and the number before anything starts.
             </p>
             <Button asChild className="mt-5 bg-wa text-wa-ink hover:bg-wa/90">
@@ -248,14 +248,14 @@ export default async function HomePage() {
             </Button>
           </div>
 
-          <ol className="relative grid gap-4.5 gap-[18px] pl-[46px] before:absolute before:bottom-3 before:left-[17px] before:top-3 before:w-0.5 before:rounded-sm before:bg-border">
+          <ol className="relative grid gap-4.5 gap-[18px] pl-[46px] before:absolute before:bottom-3 before:left-[17px] before:top-3 before:w-0.5 before:rounded-sm before:bg-white/15">
             {[
               { t: "Talk to us", d: "A 15-minute call. You describe how things work today. We tell you which product or service fits — and if none of them do, we say that instead of selling you something." },
               { t: "Fixed quote", d: "You get the scope, the timeline and the price in writing. It does not move unless you ask for something new." },
               { t: "Setup & training", d: "We create your account, import your existing data, configure everything around your process, and train your team until they are comfortable." },
               { t: "Live & supported", d: "You go live, and we stay. Updates, changes, and quick support on WhatsApp when something needs attention." },
             ].map((s, i) => (
-              <li key={s.t} className="relative rounded-[22px] border bg-card p-6 shadow-xs">
+              <li key={s.t} className="relative rounded-[22px] bg-card p-6 text-foreground shadow-xl shadow-black/25">
                 <span className="absolute -left-[46px] top-5 grid size-9 place-items-center rounded-full border-2 border-brand bg-brand text-[0.9rem] font-extrabold leading-none text-white">
                   {i + 1}
                 </span>
