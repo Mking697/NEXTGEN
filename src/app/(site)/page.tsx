@@ -5,6 +5,7 @@ import { Section, SectionHead } from "@/components/site/section";
 import { ProductCard } from "@/components/site/product-card";
 import { ServiceCard } from "@/components/site/service-card";
 import { BrandMoment } from "@/components/site/brand-moment";
+import { MeshGradient } from "@/components/site/mesh-gradient";
 import { Reveal } from "@/components/site/reveal";
 import { Counter } from "@/components/site/counter";
 import { LeadForm } from "@/components/site/lead-form";
@@ -23,6 +24,10 @@ export default async function HomePage() {
     <>
       {/* ============ HERO ============ */}
       <section className="relative overflow-hidden bg-[radial-gradient(1100px_520px_at_88%_-10%,rgba(248,0,0,.07),transparent_62%),radial-gradient(760px_420px_at_4%_8%,rgba(198,0,0,.045),transparent_60%)] py-14 md:py-20">
+        {/* Behind everything, and pointer-events-none so it can never swallow a
+            tap on the CTA. The section's own gradient stays underneath as the
+            fallback for anyone the shader refuses to run for. */}
+        <MeshGradient className="pointer-events-none absolute inset-0 size-full" />
         <svg
           className="pointer-events-none absolute -right-[6%] top-[12%] hidden w-[52%] max-w-[640px] opacity-10 lg:block"
           viewBox="0 0 600 260" fill="none" aria-hidden="true"
