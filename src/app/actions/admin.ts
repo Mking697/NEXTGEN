@@ -226,6 +226,11 @@ export async function saveSettings(_prev: ActionResult | null, formData: FormDat
       title: String(formData.get("seo_title") ?? "").trim(),
       description: String(formData.get("seo_description") ?? "").trim(),
     },
+    tracking: {
+      metaPixelId: String(formData.get("meta_pixel_id") ?? "").trim(),
+      ga4Id: String(formData.get("ga4_id") ?? "").trim(),
+      googleAdsId: String(formData.get("google_ads_id") ?? "").trim(),
+    },
     audiences: lines(formData.get("audiences")),
     ...(trust.length ? { trust } : {}),
     ...(faq.length ? { faq } : {}),

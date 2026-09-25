@@ -86,7 +86,7 @@ under `/admin` is redirected to the login.
 | Products | Full CRUD: copy, features, highlights, pricing, stripe colours, visibility, order |
 | Services | Full CRUD: copy, deliverables, outcomes, icon, pricing, visibility, order |
 | Leads | Search, status (new → contacted → qualified → won/lost), CSV export, click-to-WhatsApp |
-| Settings | Contact details, social links, hero copy, trust band, audience chips, CTA band, FAQ, SEO |
+| Settings | Contact details, social links, hero copy, trust band, audience chips, CTA band, FAQ, SEO, tracking IDs |
 
 Saving calls `revalidatePath("/", "layout")`, so a change appears on the public
 site on the next request rather than waiting for a rebuild.
@@ -119,6 +119,14 @@ trust the site does have comes from five products live at real domains that a
 visitor can open and check in one tap, which is why the hero proof card and the
 product cards lead with the domain. If you add testimonials later, use real ones
 — fabricated reviews are a Meta Ads policy violation as well as a lie.
+
+**Tracking is off until an ID is entered.** The Meta Pixel, GA4 and Google Ads
+tags are driven from Settings, not from environment variables, so an ID can be
+added without a redeploy — and an empty field means that script is never loaded
+and no cookie is set. They render inside the public layout only, so admin
+traffic never reaches the ad platforms. The `Lead` event fires when the enquiry
+form *succeeds*, not when it is submitted: a failed or rejected submission is
+not a lead, and counting it teaches Meta to go looking for the wrong people.
 
 **The trust band takes three numbers, not four.** Each is checkable. A padded
 fourth costs more trust with this audience than the symmetry is worth.

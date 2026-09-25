@@ -128,6 +128,23 @@ export function SettingsEditor({ settings }: { settings: SiteSettings }) {
         </Button>
       </FormSection>
 
+      <FormSection title="Tracking &amp; pixels">
+        <p className="text-[0.8rem] text-muted-foreground">
+          Leave a field empty and that script is never loaded at all — no tag, no cookie.
+          Paste an ID here and it goes live on the next page load; nothing needs redeploying.
+          These run on the public site only, so your own admin visits stay out of the reporting.
+        </p>
+        <TextField
+          label="Meta Pixel ID" name="meta_pixel_id" defaultValue={s.tracking.metaPixelId}
+          placeholder="1234567890123456"
+          hint="Meta Events Manager → Data Sources. Digits only. Without this, Meta cannot tell which ad produced an enquiry, and cannot build a retargeting audience."
+        />
+        <div className="grid gap-4 sm:grid-cols-2">
+          <TextField label="GA4 Measurement ID" name="ga4_id" defaultValue={s.tracking.ga4Id} placeholder="G-XXXXXXXXXX" />
+          <TextField label="Google Ads Conversion ID" name="google_ads_id" defaultValue={s.tracking.googleAdsId} placeholder="AW-XXXXXXXXX" />
+        </div>
+      </FormSection>
+
       <FormSection title="SEO">
         <TextField label="Page title" name="seo_title" defaultValue={s.seo.title}
           hint="Shown in the browser tab and in Google results. Around 60 characters works best." />

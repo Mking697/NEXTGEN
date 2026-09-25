@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import type { Product, Service } from "@/lib/types";
+import { trackLead } from "@/lib/track";
 
 export function LeadForm({
   products, services, preselect,
@@ -15,12 +16,20 @@ export function LeadForm({
   const formRef = useRef<HTMLFormElement>(null);
   const uid = useId();
 
-  useEffect(() => {
-    if (state?.ok) formRef.current?.reset();
-  }, [state]);
-
   const selected =
     [...products, ...services].find((x) => x.slug === preselect)?.name ?? "";
+
+  // Read through a ref so the effect depends on the submission alone. Listing
+  // `selected` as a dependency would re-fire the Lead event if the preselected
+  // item changed while a success was still on screen.
+  const selectedRef = useRef(selected);
+  selectedRef.current = selected;
+
+  useEffect(() => {
+    if (!state?.ok) return;
+    formRef.current?.reset();
+    trackLead(selectedRef.current);
+  }, [state]);
 
   return (
     <form ref={formRef} action={action} className="rounded-3xl border bg-card p-6 shadow-lg sm:p-8">

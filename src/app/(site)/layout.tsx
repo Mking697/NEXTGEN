@@ -1,6 +1,7 @@
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { WhatsAppFab } from "@/components/site/whatsapp-fab";
+import { Tracking } from "@/components/site/tracking";
 import { getProducts, getServices, getSettings, waLink } from "@/lib/data";
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -24,6 +25,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <main id="main" tabIndex={-1} className="outline-none">{children}</main>
       <SiteFooter settings={settings} products={products} services={services} />
       <WhatsAppFab href={wa} />
+      <Tracking {...settings.tracking} />
     </>
   );
 }
