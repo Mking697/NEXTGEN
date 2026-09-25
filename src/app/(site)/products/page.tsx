@@ -44,7 +44,7 @@ export default async function ProductsPage() {
       <Section>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {products.map((p, i) => (
-            <Reveal key={p.slug} delay={(i % 3) * 80}>
+            <Reveal key={p.slug} delay={(i % 3) * 80} className="h-full">
               <ProductCard p={p} whatsapp={settings.contact.whatsapp} />
             </Reveal>
           ))}

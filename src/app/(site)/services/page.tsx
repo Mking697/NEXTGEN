@@ -43,7 +43,7 @@ export default async function ServicesPage() {
       <Section>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => (
-            <Reveal key={s.slug} delay={(i % 3) * 80}>
+            <Reveal key={s.slug} delay={(i % 3) * 80} className="h-full">
               <ServiceCard s={s} whatsapp={settings.contact.whatsapp} />
             </Reveal>
           ))}

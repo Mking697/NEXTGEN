@@ -20,7 +20,7 @@ export function ProductCard({ p, whatsapp }: { p: Product; whatsapp: string }) {
   const isLive = p.status === "live" && p.url;
 
   return (
-    <article className="relative flex flex-col overflow-hidden rounded-[22px] border bg-card shadow-xs transition-all duration-200 hover:border-input/40 hover:shadow-md md:hover:-translate-y-[3px]">
+    <article className="relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-card shadow-xs transition-all duration-200 hover:border-input/40 hover:shadow-md md:hover:-translate-y-[3px]">
       {/* The per-product colour lives here and nowhere else. Five saturated
           tiles in a grid on white read as a rainbow and cost the CTA its
           monopoly; a 3px stripe keeps the identity at no cost. */}

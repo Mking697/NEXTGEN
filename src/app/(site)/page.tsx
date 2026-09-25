@@ -144,7 +144,7 @@ export default async function HomePage() {
         />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {products.slice(0, 6).map((p, i) => (
-            <Reveal key={p.slug} delay={(i % 3) * 80}>
+            <Reveal key={p.slug} delay={(i % 3) * 80} className="h-full">
               <ProductCard p={p} whatsapp={contact.whatsapp} />
             </Reveal>
           ))}
@@ -165,7 +165,7 @@ export default async function HomePage() {
         />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.slice(0, 6).map((s, i) => (
-            <Reveal key={s.slug} delay={(i % 3) * 80}>
+            <Reveal key={s.slug} delay={(i % 3) * 80} className="h-full">
               <ServiceCard s={s} whatsapp={contact.whatsapp} />
             </Reveal>
           ))}
