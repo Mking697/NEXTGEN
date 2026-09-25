@@ -37,8 +37,11 @@ DirectoryIndex index.html
 # ---------- Browser caching ----------
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType text/css              "access plus 1 month"
-  ExpiresByType application/javascript "access plus 1 month"
+  # CSS and JS are NOT versioned in their filenames and change on every
+  # deploy, so they must revalidate. A conditional request costs one 304;
+  # a month-long cache costs a visitor a half-old site, which is worse.
+  ExpiresByType text/css              "access plus 0 seconds"
+  ExpiresByType application/javascript "access plus 0 seconds"
   ExpiresByType image/svg+xml         "access plus 1 year"
   ExpiresByType image/png             "access plus 1 year"
   ExpiresByType image/jpeg            "access plus 1 year"
@@ -58,6 +61,9 @@ DirectoryIndex index.html
 
 # ---------- Security headers ----------
 <IfModule mod_headers.c>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"

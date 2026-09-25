@@ -189,7 +189,7 @@ values
    '["Unified Ad Dashboard","Cost Per Lead Tracking","ROAS Reports","Campaign Comparison","Auto Report Scheduling","Client Sharing"]'::jsonb,
    true,true,5),
 
-  ('nextgen-crm','NextGen CRM','Sales CRM & Lead Pipeline','Sales','soon',
+  ('essor-crm','Essor CRM','Sales CRM & Lead Pipeline','Sales','soon',
    null,'CR','#F59E0B','#F87171',
    'From first enquiry to closed deal: your whole sales pipeline in one place, with follow-up reminders built in.',
    '["Lead Pipeline","Follow-up Reminders","Call & Note Logs","Quotation Tracking","Team Performance","WhatsApp & Email Sync"]'::jsonb,

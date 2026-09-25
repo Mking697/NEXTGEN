@@ -126,8 +126,8 @@
   },
   {
     "id": "p6",
-    "slug": "nextgen-crm",
-    "name": "NextGen CRM",
+    "slug": "essor-crm",
+    "name": "Essor CRM",
     "tagline": "Sales CRM & Lead Pipeline",
     "category": "Sales",
     "status": "soon",
@@ -136,7 +136,7 @@
     "color_from": "#F59E0B",
     "color_to": "#F87171",
     "description": "From first enquiry to closed deal — your whole sales pipeline in one place, with follow-up reminders built in.",
-    "long_description": "NextGen CRM is being built for sales teams. Every lead shows its source, stage and next action clearly. Follow-up reminders, call logs, quotation tracking and team performance all live in a single pipeline view.",
+    "long_description": "Essor CRM is being built for sales teams. Every lead shows its source, stage and next action clearly. Follow-up reminders, call logs, quotation tracking and team performance all live in a single pipeline view.",
     "features": ["Lead Pipeline", "Follow-up Reminders", "Call & Note Logs", "Quotation Tracking", "Team Performance", "WhatsApp & Email Sync"],
     "highlights": [
       "No lead goes cold — the reminder comes to you",

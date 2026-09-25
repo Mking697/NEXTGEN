@@ -231,8 +231,8 @@ ul{margin:0;padding:0;list-style:none}
 .hero-visual{position:relative}
 
 /* ---------- 7. Trust band ---------- */
-.trust-band{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;text-align:center}
-@media(max-width:760px){.trust-band{grid-template-columns:repeat(2,1fr);gap:28px}}
+.trust-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px;text-align:center}
+@media(max-width:560px){.trust-band{grid-template-columns:1fr;gap:26px}}
 .trust-band b{
   display:block;font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:800;letter-spacing:-.03em;
   color:var(--brand);font-variant-numeric:tabular-nums;line-height:1.1;
@@ -798,4 +798,93 @@ main:focus{outline:none}
   .brand-pin{position:static;height:auto;padding:var(--s-6) 22px}
   .brand-video-wrap{transform:none;opacity:1}
   .brand-copy{opacity:1;transform:none}
+}
+
+/* ============================================================
+   31. MOTION
+   Entrance motion runs once on load for the hero (it is above the
+   fold, so a scroll trigger would never fire). Everything else is
+   scroll-linked in section 30. All of it is decoration.
+   ============================================================ */
+
+/* ---- 31a. Hero entrance, staggered ---- */
+@keyframes rise{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:none}
+}
+.hero .pill,
+.hero h1,
+.hero .lead,
+.hero .btn-row,
+.hero-visual{
+  animation:rise .7s var(--ease) both;
+}
+.hero .pill      {animation-delay:.05s}
+.hero h1         {animation-delay:.13s}
+.hero .lead      {animation-delay:.23s}
+.hero .btn-row   {animation-delay:.32s}
+.hero-visual     {animation-delay:.24s}
+
+/* The swoosh draws itself in behind the headline. */
+@keyframes swoosh-in{
+  from{opacity:0;transform:translate(26px,18px) rotate(-4deg)}
+  to{opacity:.10;transform:none}
+}
+.hero-swoosh{animation:swoosh-in 1.1s var(--ease) .35s both}
+
+/* ---- 31b. Section heads: the eyebrow rule draws out on approach ---- */
+@supports (animation-timeline:view()){
+  .section-head .eyebrow::before{
+    animation:rule-draw linear both;
+    animation-timeline:view();
+    animation-range:entry 20% entry 70%;
+  }
+}
+@keyframes rule-draw{from{width:0}to{width:22px}}
+
+/* ---- 31c. Buttons ---- */
+/* A light sheen that crosses the primary button on hover. Pure transform,
+   so it composites on the GPU and costs nothing on scroll. */
+.btn-primary{position:relative;overflow:hidden;isolation:isolate}
+.btn-primary::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);
+  transform:translateX(-120%);
+}
+@media(hover:hover){
+  .btn-primary:hover::after{transform:translateX(120%);transition:transform .7s var(--ease)}
+}
+
+/* ---- 31d. Cards lift their stripe as they arrive ---- */
+@supports (animation-timeline:view()){
+  .p-stripe,.s-stripe{
+    animation:stripe-grow linear both;
+    animation-timeline:view();
+    animation-range:entry 25% entry 80%;
+    transform-origin:0 50%;
+  }
+}
+@keyframes stripe-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ---- 31e. The live dot gets a soft halo ---- */
+@keyframes halo{
+  0%{box-shadow:0 0 0 0 rgba(11,122,67,.35)}
+  70%{box-shadow:0 0 0 7px rgba(11,122,67,0)}
+  100%{box-shadow:0 0 0 0 rgba(11,122,67,0)}
+}
+.badge-live .dot{animation:pulse 2s infinite, halo 2.4s infinite}
+
+/* ---- 31f. Ticker items brighten on approach ---- */
+.ticker-item{transition:color .3s var(--ease)}
+.ticker-item:hover{color:var(--text)}
+
+/* Motion is decoration — a reduced-motion preference removes all of it. */
+@media(prefers-reduced-motion:reduce){
+  .hero .pill,.hero h1,.hero .lead,.hero .btn-row,.hero-visual,
+  .hero-swoosh,.section-head .eyebrow::before,
+  .p-stripe,.s-stripe,.badge-live .dot{
+    animation:none!important;opacity:1!important;transform:none!important;
+  }
+  .hero-swoosh{opacity:.10!important}
+  .btn-primary::after{display:none}
 }
