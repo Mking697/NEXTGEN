@@ -22,8 +22,11 @@ scratchpad/
 .env.*
 secrets.json
 
-# Logo source masters (large originals, not served by the site)
-brand/
+# Logo source masters (large originals, not served by the site).
+# Root-anchored on purpose: a bare `brand/` matches at any depth, which
+# silently swallowed public/brand/ — the logos the site actually serves —
+# so they never reached the deploy and the live header rendered alt text.
+/brand/
 
 # --- Next.js ---
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
@@ -80,3 +83,6 @@ next-env.d.ts
 
 # the template itself should be committed
 !.env.example
+
+# Old static site's logo masters — large, and nothing serves them.
+legacy-static/brand/

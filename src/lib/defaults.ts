@@ -15,7 +15,7 @@ export const defaultSettings: SiteSettings = {
     phone: "+91 93114 32603",
     phone2: "+91 90272 02796",
     whatsapp: "919311432603",
-    email: "manojtiwari8428@gmail.com",
+    email: "info@essorautomations.com",
     address: "India",
     hours: "Mon – Sat, 10:00 AM – 7:00 PM IST",
   },
