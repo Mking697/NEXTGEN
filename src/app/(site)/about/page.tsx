@@ -99,7 +99,7 @@ export default async function AboutPage() {
         <div className="prose-essor mx-auto max-w-[820px]">
           <h2 className="text-center">Our story</h2>
           <p>
-            Essor Automations was founded in <strong>April 2026</strong> and builds automation software
+            Essor Automations was founded on <strong>13 January 2022</strong> and builds automation software
             for small and medium businesses. We started with custom development work, and as the same
             problems kept coming up with different clients, we turned those solutions into proper
             products &mdash; so the next business would not have to pay to build the same thing from

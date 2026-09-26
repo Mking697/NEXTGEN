@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Check, X, ArrowUp, Zap, Building2, SlidersHorizontal, Smartphone, ShieldCheck, Headset } from "lucide-react";
+import { ArrowUpRight, Check, X, ArrowUp, Zap, Building2, SlidersHorizontal, Smartphone, ShieldCheck, Headset, LayoutDashboard, Database, Plug, Workflow } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHead } from "@/components/site/section";
 import { ProductCard } from "@/components/site/product-card";
@@ -154,6 +154,76 @@ export default async function HomePage() {
         </div>
       </Section>
 
+      {/* ============ CUSTOM SOFTWARE & ERP ============ */}
+      <Section id="custom-software">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <Reveal>
+            <span className="mb-4 inline-flex items-center gap-2 text-[0.7rem] font-extrabold uppercase tracking-[0.09em] text-muted-foreground">
+              <span className="h-0.5 w-[22px] rounded-sm bg-[linear-gradient(100deg,var(--brand-bright),var(--brand-ink))]" />
+              Custom Software &amp; ERP
+            </span>
+            <h2 className="mb-3 text-[clamp(1.6rem,3.4vw,2.3rem)] font-extrabold">
+              Tell us your process. We build the software around it.
+            </h2>
+            <p className="mb-5 text-[clamp(1rem,1.3vw,1.125rem)] text-muted-foreground">
+              Off-the-shelf software forces your business to bend around it. We design and build custom
+              web applications, dashboards, integrations and ERPs — on the same in-house team and
+              infrastructure that already runs five live products, not an outsourced dev shop.
+            </p>
+            <ul className="space-y-1">
+              {[
+                ["Built in-house", "the same engineers who build and run our own products — nothing resold"],
+                ["Fixed price per milestone", "scope, timeline and price agreed before anything starts"],
+                ["Deployment & hosting included", "we launch it and keep it running, not just hand over code"],
+                ["Support after go-live", "updates and changes on WhatsApp, not a ticket queue"],
+              ].map(([b, rest]) => (
+                <li key={b} className="flex items-start gap-3.5 py-2.5 text-[0.96rem] text-muted-foreground">
+                  <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full border border-ok-line bg-ok-tint text-ok">
+                    <Check className="size-3.5" strokeWidth={3} />
+                  </span>
+                  <span><b className="font-bold text-foreground">{b}</b> — {rest}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex flex-wrap gap-3.5">
+              <Button asChild size="lg"><Link href="/services/custom-software-development">See what we build</Link></Button>
+              <Button asChild size="lg" className="bg-wa text-wa-ink hover:bg-wa/90">
+                <a href={wa("Hi, I want to talk about building custom software for my business.")} target="_blank" rel="noopener noreferrer">
+                  Talk about your project
+                </a>
+              </Button>
+            </div>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <div className="rounded-3xl border bg-card p-6 shadow-lg sm:p-8">
+              <div className="mb-5 flex items-center gap-2 border-b pb-4">
+                <span className="size-[7px] rounded-full bg-ok" />
+                <b className="text-[0.95rem] font-bold">What we build</b>
+              </div>
+              <div className="grid gap-3.5">
+                {[
+                  { Icon: LayoutDashboard, t: "Web apps & dashboards", d: "Custom-built tools and reporting screens for how your team actually works." },
+                  { Icon: Database, t: "ERP, inventory & accounts", d: "Purchase, sales, stock and GST-ready accounts, on one connected system." },
+                  { Icon: Plug, t: "Third-party & payment integrations", d: "Your existing tools and payment gateways, wired into one place." },
+                  { Icon: Workflow, t: "Workflow automation", d: "The manual, repetitive steps — quotations, follow-ups, alerts — running by themselves." },
+                ].map(({ Icon, t, d }) => (
+                  <div key={t} className="flex items-start gap-3 rounded-xl bg-muted p-3">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-[10px] bg-brand-tint text-brand-ink">
+                      <Icon className="size-[18px]" />
+                    </span>
+                    <span>
+                      <b className="block text-[0.9rem] font-bold">{t}</b>
+                      <small className="text-[0.82rem] text-muted-foreground">{d}</small>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
       <BrandMoment />
 
       {/* ============ SERVICES ============ */}
@@ -204,7 +274,7 @@ export default async function HomePage() {
       <Section id="why">
         <SectionHead
           eyebrow="Why Essor"
-          title="A product company, not an agency promising to build one"
+          title="A product company, not an agency that only ever promises"
           lead="Most people offer to build software for you. Ours is already built, already deployed and already running. That is why our timelines are in weeks, not years."
         />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
