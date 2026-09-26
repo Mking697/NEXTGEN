@@ -123,37 +123,6 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* ============ AUDIENCE ============ */}
-      <Section tight>
-        <p className="mb-5 text-center text-[0.7rem] font-extrabold uppercase tracking-[0.14em] text-muted-foreground">Built for</p>
-        <ul className="flex flex-wrap justify-center gap-3">
-          {audiences.map((a) => (
-            <li key={a} className="rounded-full border bg-card px-4.5 px-[18px] py-2.5 text-[0.89rem] font-semibold text-muted-foreground">
-              {a}
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      {/* ============ PRODUCTS ============ */}
-      <Section id="products" alt>
-        <SectionHead
-          eyebrow="Our Products"
-          title="Software you can start using this week"
-          lead="Each one solves a specific problem for a specific kind of business. Five are already live, so you can open them and check for yourself."
-        />
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {products.slice(0, 6).map((p, i) => (
-            <Reveal key={p.slug} delay={(i % 3) * 80} className="h-full">
-              <ProductCard p={p} whatsapp={contact.whatsapp} />
-            </Reveal>
-          ))}
-        </div>
-        <div className="mt-11 text-center">
-          <Button asChild variant="outline" size="lg"><Link href="/products">See all {products.length} products</Link></Button>
-        </div>
-      </Section>
-
       {/* ============ CUSTOM SOFTWARE & ERP ============ */}
       <Section id="custom-software">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
@@ -221,6 +190,37 @@ export default async function HomePage() {
               </div>
             </div>
           </Reveal>
+        </div>
+      </Section>
+
+      {/* ============ AUDIENCE ============ */}
+      <Section tight>
+        <p className="mb-5 text-center text-[0.7rem] font-extrabold uppercase tracking-[0.14em] text-muted-foreground">Built for</p>
+        <ul className="flex flex-wrap justify-center gap-3">
+          {audiences.map((a) => (
+            <li key={a} className="rounded-full border bg-card px-4.5 px-[18px] py-2.5 text-[0.89rem] font-semibold text-muted-foreground">
+              {a}
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {/* ============ PRODUCTS ============ */}
+      <Section id="products" alt>
+        <SectionHead
+          eyebrow="Ready-Made Products"
+          title="Or start this week with software we have already built"
+          lead="Five products are already live and running real businesses — open any of them and check for yourself. If one of them fits, it is cheaper and faster than building custom."
+        />
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {products.slice(0, 6).map((p, i) => (
+            <Reveal key={p.slug} delay={(i % 3) * 80} className="h-full">
+              <ProductCard p={p} whatsapp={contact.whatsapp} />
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-11 text-center">
+          <Button asChild variant="outline" size="lg"><Link href="/products">See all {products.length} products</Link></Button>
         </div>
       </Section>
 
