@@ -207,7 +207,7 @@ export async function saveSettings(_prev: ActionResult | null, formData: FormDat
       instagram: String(formData.get("instagram") ?? "").trim(),
       linkedin: String(formData.get("linkedin") ?? "").trim(),
       youtube: String(formData.get("youtube") ?? "").trim(),
-      twitter: String(formData.get("twitter") ?? "").trim(),
+      threads: String(formData.get("threads") ?? "").trim(),
     },
     hero: {
       pill: String(formData.get("hero_pill") ?? "").trim(),

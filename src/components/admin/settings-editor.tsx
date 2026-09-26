@@ -48,7 +48,7 @@ export function SettingsEditor({ settings }: { settings: SiteSettings }) {
           <TextField label="Instagram" name="instagram" defaultValue={s.social.instagram} placeholder="https://instagram.com/..." />
           <TextField label="LinkedIn" name="linkedin" defaultValue={s.social.linkedin} placeholder="https://linkedin.com/company/..." />
           <TextField label="YouTube" name="youtube" defaultValue={s.social.youtube} placeholder="https://youtube.com/@..." />
-          <TextField label="X / Twitter" name="twitter" defaultValue={s.social.twitter} placeholder="https://x.com/..." />
+          <TextField label="Threads" name="threads" defaultValue={s.social.threads} placeholder="https://threads.net/@..." />
         </div>
       </FormSection>
 

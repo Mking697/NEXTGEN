@@ -32,7 +32,7 @@ export function OrganizationLd({ settings }: { settings: SiteSettings }) {
     .map((p) => (p ?? "").trim())
     .filter(Boolean);
 
-  const sameAs = [social.facebook, social.instagram, social.linkedin, social.youtube, social.twitter]
+  const sameAs = [social.facebook, social.instagram, social.linkedin, social.youtube, social.threads]
     .map((u) => (u ?? "").trim())
     .filter(Boolean);
 

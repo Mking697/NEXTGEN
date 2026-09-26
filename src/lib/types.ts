@@ -92,7 +92,7 @@ export interface SiteSettings {
     instagram?: string;
     linkedin?: string;
     youtube?: string;
-    twitter?: string;
+    threads?: string;
   };
   hero: {
     pill: string;
