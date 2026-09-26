@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Check, X, ArrowUp, Zap, Building2, SlidersHorizontal, Smartphone, ShieldCheck, Headset, LayoutDashboard, Database, Plug, Workflow } from "lucide-react";
+import { ArrowUpRight, Check, X, ArrowUp, Zap, Building2, SlidersHorizontal, Smartphone, ShieldCheck, Headset, LayoutDashboard, Database, Plug, Workflow, Users, PackageCheck, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHead } from "@/components/site/section";
 import { ProductCard } from "@/components/site/product-card";
@@ -90,7 +90,7 @@ export default async function HomePage() {
                   href={p.url!}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3.5 border-b px-2.5 py-3 transition-colors last:border-b-0 hover:bg-muted"
+                  className="group flex items-center gap-3.5 border-b px-2.5 py-3 transition-colors last:border-b-0 hover:bg-muted"
                 >
                   <span className="grid size-[38px] shrink-0 place-items-center rounded-xl bg-ink text-[0.78rem] font-black text-ink-foreground">
                     {p.logo_text ?? p.name.slice(0, 2).toUpperCase()}
@@ -101,7 +101,7 @@ export default async function HomePage() {
                       {p.url!.replace(/^https?:\/\//, "").replace(/\/$/, "")}
                     </small>
                   </span>
-                  <ArrowUpRight className="size-4 shrink-0 text-muted-foreground" />
+                  <ArrowUpRight className="size-4 shrink-0 text-muted-foreground transition-[color,transform] duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-ink" />
                 </a>
               ))}
             </div>
@@ -111,15 +111,23 @@ export default async function HomePage() {
 
       {/* ============ TRUST BAND ============ */}
       <Section dark tight aria-label="Company numbers">
-        <div className="grid gap-6 text-center sm:grid-cols-3">
-          {trust.map((t, i) => (
-            <Reveal key={t.label} delay={i * 80}>
-              <b className="block text-[clamp(1.7rem,3.4vw,2.4rem)] font-extrabold leading-tight tabular-nums text-brand-on-ink">
-                <Counter value={t.value} />
-              </b>
-              <span className="mt-1.5 block text-[0.8125rem] font-semibold text-ink-dim">{t.label}</span>
-            </Reveal>
-          ))}
+        <div className="grid gap-4 text-center sm:grid-cols-3">
+          {trust.map((t, i) => {
+            const Icon = [Users, PackageCheck, Rocket][i] ?? Zap;
+            return (
+              <Reveal key={t.label} delay={i * 80}>
+                <div className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-200 hover:border-white/20 hover:bg-white/[0.06] md:hover:-translate-y-[3px]">
+                  <span className="mx-auto mb-3 grid size-10 place-items-center rounded-xl bg-white/10 text-brand-on-ink transition-transform duration-200 group-hover:scale-110">
+                    <Icon className="size-5" />
+                  </span>
+                  <b className="block text-[clamp(1.7rem,3.4vw,2.4rem)] font-extrabold leading-tight tabular-nums text-brand-on-ink">
+                    <Counter value={t.value} />
+                  </b>
+                  <span className="mt-1.5 block text-[0.8125rem] font-semibold text-ink-dim">{t.label}</span>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </Section>
 
@@ -177,8 +185,8 @@ export default async function HomePage() {
                   { Icon: Plug, t: "Third-party & payment integrations", d: "Your existing tools and payment gateways, wired into one place." },
                   { Icon: Workflow, t: "Workflow automation", d: "The manual, repetitive steps — quotations, follow-ups, alerts — running by themselves." },
                 ].map(({ Icon, t, d }) => (
-                  <div key={t} className="flex items-start gap-3 rounded-xl bg-muted p-3">
-                    <span className="grid size-9 shrink-0 place-items-center rounded-[10px] bg-brand-tint text-brand-ink">
+                  <div key={t} className="group flex items-start gap-3 rounded-xl bg-muted p-3 transition-colors duration-200 hover:bg-brand-tint/50">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-[10px] bg-brand-tint text-brand-ink transition-transform duration-200 group-hover:scale-110">
                       <Icon className="size-[18px]" />
                     </span>
                     <span>
