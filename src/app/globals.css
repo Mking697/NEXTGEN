@@ -183,3 +183,100 @@
   margin-top: 2.25rem; padding: 1rem 1.125rem; border: 1px solid var(--brand-line);
   border-radius: 14px; background: var(--brand-tint); font-size: .88rem;
 }
+
+/* ============================================================
+   Scroll-driven motion
+   ------------------------------------------------------------
+   Ported from the vanilla build in legacy-static and lost in the move to
+   Next.js, where scroll motion had shrunk to a single fade-in.
+
+   Everything here is CSS scroll-driven animation, which runs on the
+   compositor and follows scroll position rather than firing once when a
+   threshold is crossed. That is both smoother and more correct: scroll back
+   up and it plays back, where a class toggle just stays on.
+
+   Every block is behind @supports and prefers-reduced-motion. Where the
+   browser has neither, the page is simply static, which is a fine page.
+   ============================================================ */
+
+/* ---- Reading progress ----
+   The bar is driven natively where scroll() exists; ScrollProgress only
+   drives it by hand where it does not, so we never fight the compositor. */
+.scroll-progress {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: 90;
+  height: 3px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(100deg, var(--brand-bright), var(--brand-ink));
+  pointer-events: none;
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      animation: progress-grow linear;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+@keyframes progress-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ---- Scroll-linked reveal ----
+   Reveal only stamps data-reveal when it has decided CSS can drive it, so
+   this never fights the JS fallback's classes. No stagger here on purpose:
+   with view() each element is timed by its own position, so a row of cards
+   already arrives together and a delay would only desynchronise it. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal] {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 62%;
+    }
+  }
+}
+@keyframes reveal-in {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---- Process rail ----
+   The connector line fills as the steps scroll past. The static line stays
+   underneath as the track, so without support this is just a plain rail. */
+.rail {
+  /* A named timeline, driven by the list's own box. An anonymous view() on
+     the pseudo-element would take the pseudo-element as its subject, and that
+     box starts at height 0 — a degenerate subject whose entry/cover ranges
+     collapse, so the fill stayed empty until the page bottom. */
+  view-timeline-name: --rail;
+  view-timeline-axis: block;
+}
+.rail::after {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 12px;
+  width: 2px;
+  height: 0;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--brand-on-ink), var(--brand));
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .rail::after {
+      animation: rail-fill linear both;
+      animation-timeline: --rail;
+      animation-range: entry 40% cover 70%;
+    }
+  }
+}
+@keyframes rail-fill {
+  from { height: 0; }
+  to   { height: calc(100% - 24px); }
+}

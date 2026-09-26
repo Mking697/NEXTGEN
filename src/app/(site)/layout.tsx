@@ -2,6 +2,7 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { WhatsAppFab } from "@/components/site/whatsapp-fab";
 import { Tracking } from "@/components/site/tracking";
+import { ScrollProgress } from "@/components/site/scroll-progress";
 import { OrganizationLd } from "@/components/site/structured-data";
 import { getProducts, getServices, getSettings, waLink } from "@/lib/data";
 
@@ -21,6 +22,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
 
   return (
     <>
+      <ScrollProgress />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-0 focus:top-0 focus:z-[200] focus:rounded-br-lg focus:bg-brand focus:px-5 focus:py-3 focus:font-bold focus:text-white"

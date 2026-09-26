@@ -248,7 +248,7 @@ export default async function HomePage() {
             </Button>
           </div>
 
-          <ol className="relative grid gap-4.5 gap-[18px] pl-[46px] before:absolute before:bottom-3 before:left-[17px] before:top-3 before:w-0.5 before:rounded-sm before:bg-white/15">
+          <ol className="rail relative grid gap-4.5 gap-[18px] pl-[46px] before:absolute before:bottom-3 before:left-[17px] before:top-3 before:w-0.5 before:rounded-sm before:bg-white/15">
             {[
               { t: "Talk to us", d: "A 15-minute call. You describe how things work today. We tell you which product or service fits — and if none of them do, we say that instead of selling you something." },
               { t: "Fixed quote", d: "You get the scope, the timeline and the price in writing. It does not move unless you ask for something new." },
