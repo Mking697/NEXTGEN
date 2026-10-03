@@ -50,7 +50,7 @@ export default async function HomePage() {
               <b className="rounded-full border border-ok-line bg-ok-tint px-2.5 py-0.5 text-[0.72rem] font-extrabold tracking-wide text-ok">
                 {liveProducts.length} LIVE
               </b>
-              <span className="size-[7px] rounded-full bg-ok" />
+              <span className="size-[7px] rounded-full bg-ok live-dot" />
               {hero.pill}
             </span>
 
@@ -67,8 +67,8 @@ export default async function HomePage() {
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3.5">
-              <Button asChild size="lg"><Link href="/contact">{hero.cta_primary}</Link></Button>
-              <Button asChild size="lg" className="bg-wa text-wa-ink hover:bg-wa/90">
+              <Button asChild size="lg" className="btn-shine"><Link href="/contact">{hero.cta_primary}</Link></Button>
+              <Button asChild size="lg" className="btn-shine bg-wa text-wa-ink hover:bg-wa/90">
                 <a href={wa("Hi, I saw your website. I would like to know which product fits my business.")} target="_blank" rel="noopener noreferrer">
                   {hero.cta_whatsapp}
                 </a>
@@ -257,7 +257,7 @@ export default async function HomePage() {
             <h2 className="mb-2 text-[clamp(1.4rem,2.8vw,2rem)] font-extrabold">{cta.title}</h2>
             <p className="mx-auto max-w-[62ch] text-[clamp(1rem,1.3vw,1.125rem)] text-ink-dim">{cta.subtitle}</p>
             <div className="mt-6 flex flex-wrap justify-center gap-3.5">
-              <Button asChild size="lg" className="bg-wa text-wa-ink hover:bg-wa/90">
+              <Button asChild size="lg" className="btn-shine bg-wa text-wa-ink hover:bg-wa/90">
                 <a href={wa("Hi, I run a business and want to know which of your products or services fits.")} target="_blank" rel="noopener noreferrer">
                   Ask on WhatsApp
                 </a>

@@ -85,7 +85,7 @@ export function SiteHeader({ whatsappHref }: { whatsappHref: string }) {
           <Button
             asChild
             size="sm"
-            className="bg-wa text-wa-ink hover:bg-wa/90"
+            className="btn-shine bg-wa text-wa-ink hover:bg-wa/90"
           >
             <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
               WhatsApp

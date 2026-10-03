@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -16,10 +17,13 @@ export function ServiceCard({ s, whatsapp }: { s: Service; whatsapp: string }) {
   const Icon = ICONS[(s.icon ?? "zap") as keyof typeof ICONS] ?? Zap;
 
   return (
-    <article className="relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-card p-7 pt-8 shadow-sm transition-all duration-200 hover:border-input/40 hover:shadow-lg md:hover:-translate-y-[3px]">
+    <article
+      className="card-glow relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-card p-7 pt-8 shadow-sm transition-all duration-200 hover:border-input/40 hover:shadow-lg md:hover:-translate-y-[3px]"
+      style={{ "--glow-a": s.color_from ?? "#C60000", "--glow-b": s.color_to ?? "#A30000" } as CSSProperties}
+    >
       <span
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-[3px]"
+        className="card-stripe absolute inset-x-0 top-0 h-[3px] overflow-hidden"
         style={{ background: `linear-gradient(135deg, ${s.color_from ?? "#C60000"}, ${s.color_to ?? "#A30000"})` }}
       />
       {s.image_url && (
@@ -61,7 +65,7 @@ export function ServiceCard({ s, whatsapp }: { s: Service; whatsapp: string }) {
       )}
 
       <div className="mt-auto flex flex-wrap gap-2.5">
-        <Button asChild size="sm" className="min-w-[130px] flex-1 bg-wa text-wa-ink hover:bg-wa/90">
+        <Button asChild size="sm" className="btn-shine min-w-[130px] flex-1 bg-wa text-wa-ink hover:bg-wa/90">
           <a href={waLink(whatsapp, `Hi, I would like a quote for ${s.name}.`)} target="_blank" rel="noopener noreferrer">
             Get a quote
           </a>

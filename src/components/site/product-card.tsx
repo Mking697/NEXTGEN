@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
@@ -20,13 +21,16 @@ export function ProductCard({ p, whatsapp }: { p: Product; whatsapp: string }) {
   const isLive = p.status === "live" && p.url;
 
   return (
-    <article className="relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-card shadow-sm transition-all duration-200 hover:border-input/40 hover:shadow-lg md:hover:-translate-y-[3px]">
+    <article
+      className="card-glow relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-card shadow-sm transition-all duration-200 hover:border-input/40 hover:shadow-lg md:hover:-translate-y-[3px]"
+      style={{ "--glow-a": p.color_from ?? "#C60000", "--glow-b": p.color_to ?? "#A30000" } as CSSProperties}
+    >
       {/* The per-product colour lives here and nowhere else. Five saturated
           tiles in a grid on white read as a rainbow and cost the CTA its
           monopoly; a 3px stripe keeps the identity at no cost. */}
       <span
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-[3px]"
+        className="card-stripe absolute inset-x-0 top-0 h-[3px] overflow-hidden"
         style={{ background: `linear-gradient(135deg, ${p.color_from ?? "#C60000"}, ${p.color_to ?? "#A30000"})` }}
       />
       {/* object-top, not object-center: a UI screenshot carries its meaning in
@@ -51,7 +55,7 @@ export function ProductCard({ p, whatsapp }: { p: Product; whatsapp: string }) {
           </div>
         </div>
         <Badge variant="outline" className={`shrink-0 gap-1.5 ${st.cls}`}>
-          {p.status === "live" && <span className="size-1.5 rounded-full bg-ok" />}
+          {p.status === "live" && <span className="live-dot size-1.5 rounded-full bg-ok" />}
           {st.label}
         </Badge>
       </div>
@@ -73,7 +77,7 @@ export function ProductCard({ p, whatsapp }: { p: Product; whatsapp: string }) {
           "pricing on request" row. */}
       {isLive ? (
         <div className="flex items-center gap-2 px-6 text-[0.88rem] text-muted-foreground">
-          <span className="size-2 rounded-full bg-ok" />
+          <span className="live-dot size-2 rounded-full bg-ok" />
           <span><strong className="text-foreground">{domainOf(p.url)}</strong> · live now</span>
         </div>
       ) : (
@@ -81,7 +85,7 @@ export function ProductCard({ p, whatsapp }: { p: Product; whatsapp: string }) {
       )}
 
       <div className="flex gap-2.5 px-6 pb-2 pt-4">
-        <Button asChild size="sm" className="flex-1 bg-wa text-wa-ink hover:bg-wa/90">
+        <Button asChild size="sm" className="btn-shine flex-1 bg-wa text-wa-ink hover:bg-wa/90">
           <a href={waLink(whatsapp, `Hi, I would like a demo of ${p.name}.`)} target="_blank" rel="noopener noreferrer">
             Get a demo
           </a>

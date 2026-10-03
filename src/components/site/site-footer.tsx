@@ -20,8 +20,11 @@ export function SiteFooter({
     /* Inverted slab: a white footer on a white page gives the scroll no
        terminus. --muted-foreground is 3.52:1 here, so the ink-* tokens are
        not optional. */
-    <footer className="mt-12 bg-ink pb-24 pt-16 text-ink-dim">
-      <div className="mx-auto max-w-[1200px] px-5">
+    <footer className="relative mt-12 overflow-hidden bg-ink pb-24 pt-16 text-ink-dim">
+      <div aria-hidden="true" className="footer-watermark">
+        <span>{brand.name.split(" ")[0].toUpperCase()}</span>
+      </div>
+      <div className="relative z-10 mx-auto max-w-[1200px] px-5">
         <div className="mb-11 grid gap-9 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1.15fr_1fr_1.2fr]">
           <div className="lg:col-auto md:col-span-2 lg:col-span-1">
             {/* The inverted mark, so the logo sits on the slab itself. It used
