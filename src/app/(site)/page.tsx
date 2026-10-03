@@ -6,6 +6,8 @@ import { ProductCard } from "@/components/site/product-card";
 import { ServiceCard } from "@/components/site/service-card";
 import { BrandMoment } from "@/components/site/brand-moment";
 import { MeshGradient } from "@/components/site/mesh-gradient";
+import { HeroParticles } from "@/components/site/hero-particles";
+import { AudienceMarquee } from "@/components/site/audience-marquee";
 import { Reveal } from "@/components/site/reveal";
 import { Counter } from "@/components/site/counter";
 import { LeadForm } from "@/components/site/lead-form";
@@ -28,6 +30,7 @@ export default async function HomePage() {
             tap on the CTA. The section's own gradient stays underneath as the
             fallback for anyone the shader refuses to run for. */}
         <MeshGradient className="pointer-events-none absolute inset-0 size-full" />
+        <HeroParticles />
         <svg
           className="pointer-events-none absolute -right-[6%] top-[12%] hidden w-[52%] max-w-[640px] opacity-10 lg:block"
           viewBox="0 0 600 260" fill="none" aria-hidden="true"
@@ -53,7 +56,7 @@ export default async function HomePage() {
 
             <h1 className="text-[clamp(2.05rem,5.6vw,3.35rem)] font-extrabold leading-[1.08]">
               {hero.title_lead}{" "}
-              <span className="text-brand-ink">{hero.title_accent}</span>{" "}
+              <span className="text-gradient-brand">{hero.title_accent}</span>{" "}
               {hero.title_tail}
             </h1>
 
@@ -204,13 +207,7 @@ export default async function HomePage() {
       {/* ============ AUDIENCE ============ */}
       <Section tight>
         <p className="mb-5 text-center text-[0.7rem] font-extrabold uppercase tracking-[0.14em] text-muted-foreground">Built for</p>
-        <ul className="flex flex-wrap justify-center gap-3">
-          {audiences.map((a) => (
-            <li key={a} className="rounded-full border bg-card px-4.5 px-[18px] py-2.5 text-[0.89rem] font-semibold text-muted-foreground">
-              {a}
-            </li>
-          ))}
-        </ul>
+        <AudienceMarquee items={audiences} />
       </Section>
 
       {/* ============ PRODUCTS ============ */}
