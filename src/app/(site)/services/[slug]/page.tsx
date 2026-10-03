@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Section } from "@/components/site/section";
 import { ServiceCard } from "@/components/site/service-card";
 import { Breadcrumb } from "@/components/site/breadcrumb";
+import { Reveal } from "@/components/site/reveal";
 import { getService, getServices, getSettings, waLink } from "@/lib/data";
 
 const ICONS = { target: Target, chart: BarChart3, chat: MessageCircle, zap: Zap, sliders: SlidersHorizontal, refresh: RefreshCw, tool: Wrench } as const;
@@ -41,9 +43,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <Section className="pt-12">
         <Breadcrumb items={[{ href: "/", label: "Home" }, { href: "/services", label: "Services" }]} current={s.name} />
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
+          <Reveal>
           <div>
             <div className="mb-5 flex items-center gap-4">
-              <span className="grid size-16 shrink-0 place-items-center rounded-2xl border border-brand-line bg-brand-tint text-brand-ink">
+              <span
+                className="grid size-16 shrink-0 place-items-center rounded-2xl border border-brand-line bg-brand-tint text-brand-ink"
+                style={{ background: `linear-gradient(135deg, ${s.color_from ?? "#FFECEC"}, ${s.color_to ?? "#FFECEC"})` }}
+              >
                 <Icon className="size-7" />
               </span>
               <div className="text-[0.8125rem] font-bold uppercase tracking-[0.08em] text-muted-foreground">{s.category}</div>
@@ -70,14 +76,19 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             )}
 
             <div className="mt-7 flex flex-wrap gap-3.5">
-              <Button asChild size="lg" className="bg-wa text-wa-ink hover:bg-wa/90">
+              <Button asChild size="lg" className="btn-shine bg-wa text-wa-ink hover:bg-wa/90">
                 <a href={wa} target="_blank" rel="noopener noreferrer">Get a free quote</a>
               </Button>
-              <Button asChild size="lg" variant="outline"><Link href={`/contact?product=${s.slug}`}>Book a call</Link></Button>
+              <Button asChild size="lg" variant="outline" className="btn-shine"><Link href={`/contact?product=${s.slug}`}>Book a call</Link></Button>
             </div>
           </div>
+          </Reveal>
 
-          <div className="rounded-3xl border bg-card p-6 shadow-lg sm:p-8">
+          <Reveal delay={120}>
+          <div
+            className="card-glow rounded-3xl border bg-card p-6 shadow-lg sm:p-8"
+            style={{ "--glow-a": s.color_from ?? "#C60000", "--glow-b": s.color_to ?? "#A30000" } as CSSProperties}
+          >
             <h2 className="mb-5 text-[1.2rem] font-bold">What is included</h2>
             {s.deliverables?.length ? (
               <ul className="space-y-1">
@@ -95,9 +106,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             )}
             <div className="mt-6 border-t pt-6">
               <p className="text-[0.9rem] text-muted-foreground">{s.price ?? s.price_note ?? "Pricing on request"}</p>
-              <Button asChild className="mt-4 w-full"><Link href={`/contact?product=${s.slug}`}>Talk to us</Link></Button>
+              <Button asChild className="btn-shine mt-4 w-full"><Link href={`/contact?product=${s.slug}`}>Talk to us</Link></Button>
             </div>
           </div>
+          </Reveal>
         </div>
 
         {s.image_url && (
@@ -117,7 +129,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <Section alt>
           <h2 className="mb-10 text-center text-[clamp(1.6rem,3.4vw,2.3rem)] font-extrabold">Other services</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {related.map((r) => <ServiceCard key={r.slug} s={r} whatsapp={settings.contact.whatsapp} />)}
+            {related.map((r, i) => (
+              <Reveal key={r.slug} delay={i * 80} className="h-full">
+                <ServiceCard s={r} whatsapp={settings.contact.whatsapp} />
+              </Reveal>
+            ))}
           </div>
         </Section>
       )}

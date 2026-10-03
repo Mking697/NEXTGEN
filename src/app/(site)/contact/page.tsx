@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Check, Mail, MessageCircle, Phone } from "lucide-react";
@@ -102,7 +103,8 @@ function ContactCard({
     <a
       href={href}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className="flex items-center gap-4 rounded-[22px] border bg-card p-5 shadow-xs transition-all hover:shadow-md md:hover:-translate-y-[3px]"
+      className="card-glow flex items-center gap-4 rounded-[22px] border bg-card p-5 shadow-xs transition-all hover:shadow-md md:hover:-translate-y-[3px]"
+      style={{ "--glow-a": "#C60000", "--glow-b": "#A30000" } as CSSProperties}
     >
       <span className={`grid size-12 shrink-0 place-items-center rounded-2xl border ${tone ?? "border-brand-line bg-brand-tint text-brand-ink"}`}>
         <Icon className="size-5" />

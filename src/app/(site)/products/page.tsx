@@ -31,8 +31,8 @@ export default async function ProductsPage() {
             whichever fits — the live ones you can open and check right now.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3.5">
-            <Button asChild><Link href="/contact">Book a Free Demo</Link></Button>
-            <Button asChild className="bg-wa text-wa-ink hover:bg-wa/90">
+            <Button asChild className="btn-shine"><Link href="/contact">Book a Free Demo</Link></Button>
+            <Button asChild className="btn-shine bg-wa text-wa-ink hover:bg-wa/90">
               <a href={waLink(settings.contact.whatsapp, "Hi, I would like to know which product fits my business.")} target="_blank" rel="noopener noreferrer">
                 WhatsApp
               </a>

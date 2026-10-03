@@ -30,12 +30,12 @@ export default async function ServicesPage() {
             Take one service or the whole stack.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3.5">
-            <Button asChild className="bg-wa text-wa-ink hover:bg-wa/90">
+            <Button asChild className="btn-shine bg-wa text-wa-ink hover:bg-wa/90">
               <a href={waLink(settings.contact.whatsapp, "Hi, I would like a quote for your marketing services.")} target="_blank" rel="noopener noreferrer">
                 Get a free quote
               </a>
             </Button>
-            <Button asChild variant="outline"><Link href="/contact">Book a Call</Link></Button>
+            <Button asChild variant="outline" className="btn-shine"><Link href="/contact">Book a Call</Link></Button>
           </div>
         </div>
       </section>

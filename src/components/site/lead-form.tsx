@@ -102,7 +102,7 @@ export function LeadForm({
         <input id={`${uid}-co`} name="company" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <Button type="submit" size="lg" className="w-full" disabled={pending}>
+      <Button type="submit" size="lg" className="btn-shine w-full" disabled={pending}>
         {pending ? "Sending..." : "Send Demo Request"}
       </Button>
       <p className="mt-3 text-[0.79rem] text-muted-foreground">
