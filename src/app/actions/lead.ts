@@ -39,7 +39,10 @@ export async function submitLead(_prev: LeadResult | null, formData: FormData): 
     });
     if (error) throw new Error(error.message);
     return { ok: true, stored: true, message: "Thank you! We have your enquiry and will contact you within 24 hours." };
-  } catch {
+  } catch (err) {
+    // Logged so the real cause (RLS, network, bad column, etc.) shows up in
+    // Vercel's function logs instead of only the generic message the visitor sees.
+    console.error("submitLead failed:", err);
     return {
       ok: false, stored: false,
       message: "Something went wrong saving that. Please message us on WhatsApp instead.",
