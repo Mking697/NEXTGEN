@@ -1,6 +1,7 @@
 "use server";
 
-import { createClient, supabaseConfigured } from "@/lib/supabase/server";
+import { supabaseConfigured } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 
 export type LeadResult = { ok: boolean; message: string; stored: boolean };
 
@@ -32,7 +33,7 @@ export async function submitLead(_prev: LeadResult | null, formData: FormData): 
   }
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const { error } = await supabase.from("leads").insert({
       name, phone, email: email || null, product: product || null,
       message: message || null, source: "website", status: "new",
