@@ -3,6 +3,7 @@
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
+import { trackCall, trackWhatsApp } from "@/lib/track";
 
 declare global {
   interface Window {
@@ -42,6 +43,24 @@ export function Tracking({
       window.gtag?.("config", id, { page_path: pathname });
     }
   }, [pathname, gtagKey]);
+
+  // Site-wide click delegation: every tel:/wa.me link counts as a conversion
+  // signal, not just the ones with a dedicated handler. This is a capture
+  // listener on document so it still fires even if a link is added later
+  // (e.g. inside a dynamically rendered card) and doesn't need per-button
+  // wiring across ~90 call sites.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest?.("a[href]") as HTMLAnchorElement | null;
+      if (!anchor) return;
+      const href = anchor.getAttribute("href") ?? "";
+      if (href.startsWith("tel:")) trackCall();
+      else if (href.includes("wa.me") || href.includes("whatsapp.com")) trackWhatsApp();
+    };
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
+  }, []);
 
   return (
     <>
