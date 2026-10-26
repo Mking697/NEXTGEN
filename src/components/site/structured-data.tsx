@@ -151,6 +151,32 @@ export function ServiceLd({
   );
 }
 
+/** schema.org/BlogPosting — lets Google show the article card in search results. */
+export function BlogPostingLd({
+  post, base,
+}: {
+  post: { slug: string; title: string; excerpt?: string | null; cover_image_url?: string | null; created_at?: string; updated_at?: string };
+  base: string;
+}) {
+  return (
+    <Ld
+      id="ld-blogposting"
+      data={{
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.excerpt ?? undefined,
+        url: `${base}/blog/${post.slug}`,
+        ...(post.cover_image_url ? { image: post.cover_image_url } : {}),
+        datePublished: post.created_at ?? post.updated_at ?? undefined,
+        dateModified: post.updated_at ?? post.created_at ?? undefined,
+        author: { "@type": "Organization", name: "Essor Automations" },
+        publisher: { "@type": "Organization", name: "Essor Automations", url: base },
+      }}
+    />
+  );
+}
+
 export function FaqLd({ faq }: { faq: SiteSettings["faq"] }) {
   if (!faq.length) return null;
   return (

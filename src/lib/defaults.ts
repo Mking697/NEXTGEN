@@ -1,4 +1,4 @@
-import type { SiteSettings, Product, Service } from "./types";
+import type { SiteSettings, Product, Service, Post } from "./types";
 
 /**
  * Seed content. The site reads Supabase when it is configured and falls back
@@ -250,6 +250,100 @@ export const defaultProducts: Product[] = [
     ],
     price_note: "Launching soon — early access open",
     published: true, featured: false, sort_order: 7,
+  },
+];
+
+export const defaultPosts: Post[] = [
+  {
+    slug: "pharmacy-billing-software-india",
+    title: "Pharmacy Billing Software in India: What to Actually Look for in 2025",
+    excerpt:
+      "GST billing, batch-wise expiry tracking and stock alerts are not optional extras for a medical store anymore — here is what separates a real system from a glorified calculator.",
+    content: `## Why counter speed is not the only thing that matters
+
+Most medical store owners shop for billing software on one measure: how fast is it at the counter. That matters, but it is only half the job. The other half shows up a month later, when expiry write-offs eat into margin that counter speed never touched.
+
+## The five things worth checking before you buy
+
+- GST-ready invoices that do not need manual correction every time a rate changes
+- Batch-wise stock tracking, not just a total quantity per item
+- Expiry alerts early enough to return or discount stock before it is a write-off
+- Supplier and purchase records that reconcile without a spreadsheet on the side
+- Reports you can actually read in two minutes, not a data dump
+
+## What this costs if you get it wrong
+
+A chemist running three registers and one spreadsheet is not short on data — they are short on time. The real cost of weak billing software is not the subscription fee, it is the hours spent every week turning raw entries into something a GST filing or a bank loan application can use.
+
+## Where DawaiStore fits
+
+DawaiStore was built around exactly this list: GST billing, batch and expiry tracking, supplier management and online ordering in one dashboard. It exists because we watched pharmacy owners lose margin to expired stock they did not see coming in time — not because "pharmacy software" was a market gap.`,
+    category: "Healthcare",
+    seo_title: "Pharmacy Billing Software in India — What to Look for in 2025",
+    seo_description:
+      "A practical checklist for choosing pharmacy billing software in India: GST billing, batch-wise expiry tracking, supplier management and real reporting.",
+    read_minutes: 5,
+    published: true, featured: true,
+  },
+  {
+    slug: "whatsapp-crm-small-business",
+    title: "Why Your Small Business Needs a WhatsApp CRM, Not Just a WhatsApp Number",
+    excerpt:
+      "If every enquiry lives in one person's phone, you do not have a sales process — you have a single point of failure. Here is what a real WhatsApp CRM changes.",
+    content: `## The problem is not WhatsApp. It is doing it manually.
+
+Indian customers message on WhatsApp before they call. That is not going to change. What does need to change is treating that channel as one employee's personal inbox instead of a tracked, assigned, reportable sales channel.
+
+## What breaks first
+
+- Leads go cold because nobody follows up after the first reply
+- Two team members separately reply to the same customer with different answers
+- There is no record of who promised what, or when
+- Nobody can tell you the actual conversion rate from WhatsApp enquiry to sale
+
+## What a shared WhatsApp CRM actually fixes
+
+A shared team inbox means every chat is visible, assignable and has a history. Auto-replies keep a lead warm even outside business hours. And because every conversation becomes a trackable lead, you get a real number for cost per lead and conversion rate instead of a guess.
+
+## Where ChatXFlow fits
+
+ChatXFlow was built for exactly this: a no-code chatbot flow builder, bulk broadcast, a shared team inbox and automatic lead capture from every incoming chat. It is the same platform behind our own WhatsApp Marketing & Automation service — we use it before we sell it.`,
+    category: "Marketing Automation",
+    seo_title: "WhatsApp CRM for Small Business — Why a Shared Inbox Beats a Personal Number",
+    seo_description:
+      "Why small businesses in India need a shared WhatsApp CRM instead of relying on one phone — lead tracking, auto-replies and conversion reporting explained.",
+    read_minutes: 4,
+    published: true, featured: true,
+  },
+  {
+    slug: "erp-vs-spreadsheets-growing-business",
+    title: "ERP vs. Spreadsheets: The Real Signal It Is Time to Switch",
+    excerpt:
+      "Spreadsheets are not the enemy. The moment three people need to trust the same number at the same time, they become one.",
+    content: `## The spreadsheet stage is normal
+
+Every business starts on spreadsheets, and for a while that is the right call — cheap, flexible, and nobody needs permission to add a column. The problem is not that spreadsheets are bad. It is that they do not scale past one source of truth per person.
+
+## The signals worth watching
+
+- Purchase, sales and stock live in separate files that someone reconciles by hand
+- Month-end reporting takes days because numbers have to be pulled from five places
+- Two people have two different numbers for the same thing, and nobody is sure which is current
+- A new hire needs a week of explanation before they can safely touch the sheet
+
+## What actually changes with an ERP
+
+The point of an ERP is not more features. It is one number, in one place, that purchase, sales, accounts and production all read from and write to. Real-time reports stop being a month-end project and become a screen anyone with the right access can open.
+
+## Where PRO ERP fits
+
+PRO ERP covers inventory, accounts and GST, purchase and sales, production planning and HR and payroll on one connected system, with role-based access so each department sees only what it needs. It is in active development with early access open now — book a free call if spreadsheets have started working against you instead of for you.`,
+    category: "ERP",
+    seo_title: "ERP vs Spreadsheets — When a Growing Business Should Switch",
+    seo_description:
+      "The real signals that spreadsheets have stopped working for your business, and what an ERP system actually changes about reporting and data trust.",
+    read_minutes: 4,
+    published: true, featured: false,
   },
 ];
 

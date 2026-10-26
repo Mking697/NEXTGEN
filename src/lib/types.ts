@@ -49,6 +49,24 @@ export interface Service {
   updated_at?: string;
 }
 
+export interface Post {
+  id?: string;
+  slug: string;
+  title: string;
+  excerpt?: string | null;
+  /** Lightweight markdown: blank-line paragraphs, "## " headings, "- " bullets. */
+  content?: string | null;
+  category?: string | null;
+  cover_image_url?: string | null;
+  seo_title?: string | null;
+  seo_description?: string | null;
+  published?: boolean | null;
+  featured?: boolean | null;
+  read_minutes?: number | null;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export interface Lead {
   id?: string;
   name?: string | null;

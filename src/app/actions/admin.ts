@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient, supabaseConfigured } from "@/lib/supabase/server";
-import type { Product, Service, SiteSettings } from "@/lib/types";
+import type { Product, Service, SiteSettings, Post } from "@/lib/types";
 
 export type ActionResult = { ok: boolean; message: string };
 
@@ -146,6 +146,47 @@ export async function deleteService(id: string): Promise<ActionResult> {
   if (error) return { ok: false, message: error.message };
   revalidatePath("/", "layout");
   return { ok: true, message: "Service deleted." };
+}
+
+/* ---------------------------------------------------------------- posts */
+
+export async function savePost(_prev: ActionResult | null, formData: FormData): Promise<ActionResult> {
+  if (!supabaseConfigured) return NOT_CONFIGURED;
+
+  const title = String(formData.get("title") ?? "").trim();
+  if (title.length < 2) return { ok: false, message: "Enter a post title." };
+
+  const row: Post = {
+    title,
+    slug: String(formData.get("slug") ?? "").trim() || slugify(title),
+    excerpt: String(formData.get("excerpt") ?? "").trim() || null,
+    content: String(formData.get("content") ?? "").trim() || null,
+    category: String(formData.get("category") ?? "").trim() || null,
+    cover_image_url: String(formData.get("cover_image_url") ?? "").trim() || null,
+    seo_title: String(formData.get("seo_title") ?? "").trim() || null,
+    seo_description: String(formData.get("seo_description") ?? "").trim() || null,
+    read_minutes: Number(formData.get("read_minutes") ?? 4) || 4,
+    published: formData.get("published") === "on",
+    featured: formData.get("featured") === "on",
+  };
+  const id = String(formData.get("id") ?? "").trim();
+  if (id) row.id = id;
+
+  const supabase = await createClient();
+  const { error } = await supabase.from("posts").upsert(row, { onConflict: "slug" });
+  if (error) return { ok: false, message: error.message };
+
+  revalidatePath("/", "layout");
+  return { ok: true, message: `Saved “${title}”.` };
+}
+
+export async function deletePost(id: string): Promise<ActionResult> {
+  if (!supabaseConfigured) return NOT_CONFIGURED;
+  const supabase = await createClient();
+  const { error } = await supabase.from("posts").delete().eq("id", id);
+  if (error) return { ok: false, message: error.message };
+  revalidatePath("/", "layout");
+  return { ok: true, message: "Post deleted." };
 }
 
 /* --------------------------------------------------------------- leads */

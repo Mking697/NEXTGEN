@@ -1,8 +1,8 @@
 import "server-only";
 import { createClient, supabaseConfigured } from "@/lib/supabase/server";
 import { createPublicClient } from "@/lib/supabase/public";
-import { defaultProducts, defaultServices, defaultSettings } from "@/lib/defaults";
-import type { Lead, Product, Service, SiteSettings } from "@/lib/types";
+import { defaultProducts, defaultServices, defaultSettings, defaultPosts } from "@/lib/defaults";
+import type { Lead, Product, Service, SiteSettings, Post } from "@/lib/types";
 
 /**
  * Read layer for the public site.
@@ -75,6 +75,34 @@ export async function getService(
 ): Promise<Service | null> {
   const all = await getServices(opts);
   return all.find((x) => x.slug === slug) ?? null;
+}
+
+/** Blog posts, newest first. Same fallback pattern as products/services. */
+export async function getPosts(opts?: { includeHidden?: boolean }): Promise<Post[]> {
+  const bySlug = (rows: Post[]) =>
+    [...rows].sort((a, b) =>
+      new Date(b.created_at ?? 0).getTime() - new Date(a.created_at ?? 0).getTime(),
+    );
+  const seed = bySlug(opts?.includeHidden ? defaultPosts : defaultPosts.filter((p) => p.published !== false));
+  if (!supabaseConfigured) return seed;
+
+  try {
+    const supabase = await readClient(opts?.includeHidden);
+    let q = supabase.from("posts").select("*").order("created_at", { ascending: false });
+    if (!opts?.includeHidden) q = q.eq("published", true);
+    const { data, error } = await q;
+    if (error || !data) return seed;
+    return data.length ? bySlug(data as Post[]) : seed;
+  } catch {
+    return seed;
+  }
+}
+
+export async function getPost(
+  slug: string, opts?: { includeHidden?: boolean },
+): Promise<Post | null> {
+  const all = await getPosts(opts);
+  return all.find((p) => p.slug === slug) ?? null;
 }
 
 /** Stored as a single JSON row so the admin can edit copy without migrations. */

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { LayoutGrid, Package, Briefcase, Inbox, Settings, ExternalLink, LogOut } from "lucide-react";
+import { LayoutGrid, Package, Briefcase, Newspaper, Inbox, Settings, ExternalLink, LogOut } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { signOut } from "@/app/actions/admin";
 import { supabaseConfigured } from "@/lib/supabase/server";
@@ -17,6 +17,7 @@ const NAV = [
   { href: "/admin", label: "Dashboard", Icon: LayoutGrid, exact: true },
   { href: "/admin/products", label: "Products", Icon: Package },
   { href: "/admin/services", label: "Services", Icon: Briefcase },
+  { href: "/admin/posts", label: "Blog", Icon: Newspaper },
   { href: "/admin/leads", label: "Leads", Icon: Inbox },
   { href: "/admin/settings", label: "Settings", Icon: Settings },
 ];
