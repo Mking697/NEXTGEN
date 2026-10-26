@@ -135,7 +135,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <div className="relative aspect-[16/9] overflow-hidden rounded-[22px] border bg-muted shadow-lg">
               <Image
                 src={s.image_url} alt={`${s.name} — a real screen from the service`} fill
-                sizes="(max-width:1024px) 100vw, 1100px" priority
+                sizes="(max-width:1024px) 100vw, 1100px"
                 className="object-cover object-top"
               />
             </div>

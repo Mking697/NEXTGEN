@@ -151,7 +151,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <div className="relative aspect-[16/9] overflow-hidden rounded-[22px] border bg-muted shadow-lg">
               <Image
                 src={p.image_url} alt={`${p.name} — a real screen from the product`} fill
-                sizes="(max-width:1024px) 100vw, 1100px" priority
+                sizes="(max-width:1024px) 100vw, 1100px"
                 className="object-cover object-top"
               />
             </div>
