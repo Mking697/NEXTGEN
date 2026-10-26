@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import type { Service } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import { waLink } from "@/lib/data";
+import { waLink } from "@/lib/wa";
 
 const ICONS = {
   target: Target, chart: BarChart3, chat: MessageCircle, zap: Zap,

@@ -148,6 +148,4 @@ export async function getLeads(): Promise<Lead[]> {
 }
 
 /** Build a wa.me link with a prefilled message. */
-export function waLink(whatsapp: string, text: string) {
-  return `https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`;
-}
+export { waLink } from "@/lib/wa";

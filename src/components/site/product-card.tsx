@@ -5,7 +5,7 @@ import { ExternalLink } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { waLink } from "@/lib/data";
+import { waLink } from "@/lib/wa";
 
 const STATUS = {
   live: { label: "Live", cls: "bg-ok-tint text-ok border-ok-line" },

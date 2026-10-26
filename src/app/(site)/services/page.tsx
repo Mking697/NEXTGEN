@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/site/section";
-import { ServiceCard } from "@/components/site/service-card";
-import { Reveal } from "@/components/site/reveal";
 import { Breadcrumb } from "@/components/site/breadcrumb";
+import { ServicesFilter } from "@/components/site/services-filter";
 import { getServices, getSettings, waLink } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -41,13 +40,7 @@ export default async function ServicesPage() {
       </section>
 
       <Section>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => (
-            <Reveal key={s.slug} delay={(i % 3) * 80} className="h-full">
-              <ServiceCard s={s} whatsapp={settings.contact.whatsapp} />
-            </Reveal>
-          ))}
-        </div>
+        <ServicesFilter services={services} whatsapp={settings.contact.whatsapp} />
       </Section>
     </>
   );

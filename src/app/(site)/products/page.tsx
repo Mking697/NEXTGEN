@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/site/section";
-import { ProductCard } from "@/components/site/product-card";
-import { Reveal } from "@/components/site/reveal";
 import { Breadcrumb } from "@/components/site/breadcrumb";
+import { ProductsFilter } from "@/components/site/products-filter";
 import { getProducts, getSettings, waLink } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -42,13 +41,7 @@ export default async function ProductsPage() {
       </section>
 
       <Section>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {products.map((p, i) => (
-            <Reveal key={p.slug} delay={(i % 3) * 80} className="h-full">
-              <ProductCard p={p} whatsapp={settings.contact.whatsapp} />
-            </Reveal>
-          ))}
-        </div>
+        <ProductsFilter products={products} whatsapp={settings.contact.whatsapp} />
       </Section>
     </>
   );
