@@ -17,11 +17,21 @@ export async function submitLead(_prev: LeadResult | null, formData: FormData): 
   if (honey) return { ok: true, message: "Thank you.", stored: false };
 
   if (name.length < 2) return { ok: false, message: "Please enter your name.", stored: false };
-  if (!/^[+\d][\d\s-]{7,17}$/.test(phone)) {
-    return { ok: false, message: "Please enter a valid phone number (10 digits).", stored: false };
+
+  // Indian mobile: 10 digits starting 6-9, with an optional +91/91/0 prefix.
+  // Stored as the bare 10-digit number so the admin's wa.me link always works.
+  const phoneDigits = phone.replace(/[\s-]/g, "");
+  const phoneMatch = phoneDigits.match(/^(?:\+?91|0)?([6-9]\d{9})$/);
+  if (!phoneMatch) {
+    return {
+      ok: false, stored: false,
+      message: "Please enter a valid 10-digit Indian mobile number (e.g. 98XXXXXXXX).",
+    };
   }
-  if (email && !/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)) {
-    return { ok: false, message: "That email address does not look right.", stored: false };
+  const normalizedPhone = phoneMatch[1];
+
+  if (!email || !/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)) {
+    return { ok: false, message: "Please enter a valid email address.", stored: false };
   }
 
   if (!supabaseConfigured) {
@@ -35,7 +45,7 @@ export async function submitLead(_prev: LeadResult | null, formData: FormData): 
   try {
     const supabase = createPublicClient();
     const { error } = await supabase.from("leads").insert({
-      name, phone, email: email || null, product: product || null,
+      name, phone: normalizedPhone, email, product: product || null,
       message: message || null, source: "website", status: "new",
     });
     if (error) throw new Error(error.message);

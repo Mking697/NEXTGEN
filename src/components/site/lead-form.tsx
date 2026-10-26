@@ -66,8 +66,8 @@ export function LeadForm({
       </div>
 
       <div className="mb-4">
-        <Label htmlFor={`${uid}-email`} className="mb-1.5">Email</Label>
-        <Input id={`${uid}-email`} name="email" type="email" autoComplete="email" placeholder="you@company.com" />
+        <Label htmlFor={`${uid}-email`} className="mb-1.5">Email <span className="text-destructive">*</span></Label>
+        <Input id={`${uid}-email`} name="email" type="email" required autoComplete="email" placeholder="you@company.com" />
       </div>
 
       <div className="mb-4">

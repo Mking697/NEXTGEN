@@ -23,6 +23,7 @@ const TONE: Record<string, string> = {
 export function LeadsTable({ leads }: { leads: Lead[] }) {
   const [q, setQ] = useState("");
   const [pending, start] = useTransition();
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const router = useRouter();
 
   const rows = useMemo(() => {
@@ -104,7 +105,28 @@ export function LeadsTable({ leads }: { leads: Lead[] }) {
                   </td>
                   <td className="border-b px-4 py-3.5 text-[0.9rem] text-muted-foreground">{l.product ?? "—"}</td>
                   <td className="border-b px-4 py-3.5 text-[0.9rem] text-muted-foreground">
-                    <span className="line-clamp-2 max-w-[260px]">{l.message ?? "—"}</span>
+                    {l.message ? (
+                      <div className="max-w-[320px]">
+                        <p className={expanded.has(l.id!) ? "whitespace-pre-wrap" : "line-clamp-2"}>
+                          {l.message}
+                        </p>
+                        {l.message.length > 90 && (
+                          <button
+                            type="button"
+                            className="mt-1 text-[0.8rem] font-semibold text-brand-ink hover:underline"
+                            onClick={() =>
+                              setExpanded((prev) => {
+                                const next = new Set(prev);
+                                if (next.has(l.id!)) next.delete(l.id!); else next.add(l.id!);
+                                return next;
+                              })
+                            }
+                          >
+                            {expanded.has(l.id!) ? "Show less" : "Show full message"}
+                          </button>
+                        )}
+                      </div>
+                    ) : "—"}
                   </td>
                   <td className="border-b px-4 py-3.5">
                     <label className="sr-only" htmlFor={`st-${l.id}`}>Status for {l.name ?? "lead"}</label>
