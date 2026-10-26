@@ -67,6 +67,90 @@ export function OrganizationLd({ settings }: { settings: SiteSettings }) {
   );
 }
 
+/** Lets Google show the breadcrumb trail in search results instead of a bare URL. */
+export function BreadcrumbLd({
+  items, base,
+}: { items: { name: string; path: string }[]; base: string }) {
+  return (
+    <Ld
+      id="ld-breadcrumb"
+      data={{
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: items.map((it, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: it.name,
+          item: `${base}${it.path}`,
+        })),
+      }}
+    />
+  );
+}
+
+/**
+ * schema.org/Product for a product page. `offers` is included only when a
+ * real numeric price exists — "Pricing on request" is not a price, and an
+ * invented one would be a structured-data policy violation.
+ */
+export function ProductLd({
+  product, base,
+}: {
+  product: { name: string; slug: string; description?: string | null; image_url?: string | null; price?: string | null };
+  base: string;
+}) {
+  const numericPrice = product.price?.match(/[\d,]+(\.\d+)?/)?.[0]?.replace(/,/g, "");
+  return (
+    <Ld
+      id="ld-product"
+      data={{
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: product.name,
+        description: product.description ?? undefined,
+        url: `${base}/products/${product.slug}`,
+        ...(product.image_url ? { image: product.image_url } : {}),
+        brand: { "@type": "Brand", name: "Essor Automations" },
+        ...(numericPrice
+          ? {
+              offers: {
+                "@type": "Offer",
+                price: numericPrice,
+                priceCurrency: "INR",
+                availability: "https://schema.org/InStock",
+                url: `${base}/products/${product.slug}`,
+              },
+            }
+          : {}),
+      }}
+    />
+  );
+}
+
+/** schema.org/Service for a service page — tied back to the Organization as provider. */
+export function ServiceLd({
+  service, base,
+}: {
+  service: { name: string; slug: string; description?: string | null; category?: string | null };
+  base: string;
+}) {
+  return (
+    <Ld
+      id="ld-service"
+      data={{
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: service.name,
+        description: service.description ?? undefined,
+        url: `${base}/services/${service.slug}`,
+        serviceType: service.category ?? undefined,
+        areaServed: "IN",
+        provider: { "@type": "Organization", name: "Essor Automations", url: base },
+      }}
+    />
+  );
+}
+
 export function FaqLd({ faq }: { faq: SiteSettings["faq"] }) {
   if (!faq.length) return null;
   return (

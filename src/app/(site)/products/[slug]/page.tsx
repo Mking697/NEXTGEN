@@ -11,6 +11,8 @@ import { ProductCard } from "@/components/site/product-card";
 import { Breadcrumb } from "@/components/site/breadcrumb";
 import { Reveal } from "@/components/site/reveal";
 import { getProduct, getProducts, getSettings, waLink } from "@/lib/data";
+import { siteUrl } from "@/lib/site-url";
+import { BreadcrumbLd, ProductLd } from "@/components/site/structured-data";
 
 export async function generateStaticParams() {
   const products = await getProducts();
@@ -25,7 +27,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${p.name} — ${p.tagline ?? ""}`.trim(),
     description: p.description ?? undefined,
     alternates: { canonical: `/products/${p.slug}` },
-    openGraph: { title: p.name, description: p.description ?? undefined, type: "website" },
+    openGraph: {
+      title: p.name,
+      description: p.description ?? undefined,
+      type: "website",
+      ...(p.image_url ? { images: [{ url: p.image_url, width: 1200, height: 675, alt: p.name }] } : {}),
+    },
   };
 }
 
@@ -44,9 +51,19 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const isLive = p.status === "live" && p.url;
   const related = all.filter((x) => x.slug !== p.slug).slice(0, 3);
   const wa = waLink(settings.contact.whatsapp, `Hi, I would like to know more about ${p.name}.`);
+  const base = siteUrl(settings.brand.url);
 
   return (
     <>
+      <BreadcrumbLd
+        base={base}
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Products", path: "/products" },
+          { name: p.name, path: `/products/${p.slug}` },
+        ]}
+      />
+      <ProductLd base={base} product={p} />
       <Section className="pt-12">
         <Breadcrumb items={[{ href: "/", label: "Home" }, { href: "/products", label: "Products" }]} current={p.name} />
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">

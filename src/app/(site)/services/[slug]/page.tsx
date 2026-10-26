@@ -10,6 +10,8 @@ import { ServiceCard } from "@/components/site/service-card";
 import { Breadcrumb } from "@/components/site/breadcrumb";
 import { Reveal } from "@/components/site/reveal";
 import { getService, getServices, getSettings, waLink } from "@/lib/data";
+import { siteUrl } from "@/lib/site-url";
+import { BreadcrumbLd, ServiceLd } from "@/components/site/structured-data";
 
 const ICONS = { target: Target, chart: BarChart3, chat: MessageCircle, zap: Zap, sliders: SlidersHorizontal, refresh: RefreshCw, tool: Wrench } as const;
 
@@ -26,6 +28,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${s.name} — ${s.tagline ?? ""}`.trim(),
     description: s.description ?? undefined,
     alternates: { canonical: `/services/${s.slug}` },
+    openGraph: {
+      title: s.name,
+      description: s.description ?? undefined,
+      type: "website",
+      ...(s.image_url ? { images: [{ url: s.image_url, width: 1200, height: 675, alt: s.name }] } : {}),
+    },
   };
 }
 
@@ -37,9 +45,19 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const Icon = ICONS[(s.icon ?? "zap") as keyof typeof ICONS] ?? Zap;
   const related = all.filter((x) => x.slug !== s.slug).slice(0, 3);
   const wa = waLink(settings.contact.whatsapp, `Hi, I am interested in your ${s.name} service.`);
+  const base = siteUrl(settings.brand.url);
 
   return (
     <>
+      <BreadcrumbLd
+        base={base}
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: s.name, path: `/services/${s.slug}` },
+        ]}
+      />
+      <ServiceLd base={base} service={s} />
       <Section className="pt-12">
         <Breadcrumb items={[{ href: "/", label: "Home" }, { href: "/services", label: "Services" }]} current={s.name} />
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
